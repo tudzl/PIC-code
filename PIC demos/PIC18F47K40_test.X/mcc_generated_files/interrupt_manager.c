@@ -16,7 +16,7 @@
     all modules selected in the GUI.
     Generation Information :
         Product Revision  :  PIC10 / PIC12 / PIC16 / PIC18 MCUs - 1.78.1
-        Device            :  PIC18F47K40
+        Device            :  PIC18LF47K40
         Driver Version    :  2.03
     The generated drivers are tested against the following:
         Compiler          :  XC8 2.10 and above or later
@@ -58,7 +58,11 @@ void  INTERRUPT_Initialize (void)
 void __interrupt() INTERRUPT_InterruptManager (void)
 {
     // interrupt handler
-    if(PIE0bits.INT0IE == 1 && PIR0bits.INT0IF == 1)
+    if(PIE0bits.TMR0IE == 1 && PIR0bits.TMR0IF == 1)
+    {
+        TMR0_ISR();
+    }
+    else if(PIE0bits.INT0IE == 1 && PIR0bits.INT0IF == 1)
     {
         INT0_ISR();
     }

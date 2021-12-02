@@ -14,9 +14,9 @@
     This header file provides implementations for driver APIs for all modules selected in the GUI.
     Generation Information :
         Product Revision  :  PIC10 / PIC12 / PIC16 / PIC18 MCUs - 1.78.1
-        Device            :  PIC18F47K40
+        Device            :  PIC18LF47K40
         Driver Version    :  2.00
-*/
+ */
 
 /*
     (c) 2018 Microchip Technology Inc. and its subsidiaries. 
@@ -39,17 +39,21 @@
     CLAIMS IN ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT 
     OF FEES, IF ANY, THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS 
     SOFTWARE.
-*/
+ */
 
 #include "mcc_generated_files/mcc.h"
+
+//#pragma config WDTE = OFF   /* WDT operating mode->WDT Disabled */ 
+//#pragma config LVP = ON     /* Low voltage programming enabled, RE3 pin is MCLR */   
 
 /*
                          Main application
  */
-void main(void)
-{
+void main(void) {
     // Initialize the device
     SYSTEM_Initialize();
+    INTERRUPT_GlobalInterruptEnable();
+    INTERRUPT_PeripheralInterruptEnable();
 
     // If using interrupts in PIC18 High/Low Priority Mode you need to enable the Global High and Low Interrupts
     // If using interrupts in PIC Mid-Range Compatibility Mode you need to enable the Global and Peripheral Interrupts
@@ -66,12 +70,33 @@ void main(void)
 
     // Disable the Peripheral Interrupts
     //INTERRUPT_PeripheralInterruptDisable();
-
-    while (1)
-    {
+    TMR0_StartTimer();
+    //TMR0_StopTimer();
+    uint8_t timer_val = 0;
+    //DOZE = 011;
+    DOZE0 = 1;
+    DOZE1 = 1;
+    DOZE2 = 0;
+    //IDLEN = 1;//idle mode, timer running ok!
+    CLK0 = 1;
+    CLK1 = 0;
+    CLK2 = 0;
+    //above code set clock source to HFINTOSC, so timer will working @ sleep.
+    SLEEP();
+    while (1) {
+        //timer_val = TMR0_ReadTimer();
+        //IO_RE0_LED_Toggle();
+        //TMR0_StopTimer();
+        //        if (timer_val>200){
+        //            timer_val = 0;
+        //        }
+        //DOZEN = 1; // resume low-power
+        //DOE = 0; // make main() go fast
+        //        IDLEN=0;
+        SLEEP();
         // Add your application code
     }
 }
 /**
  End of File
-*/
+ */

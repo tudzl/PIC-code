@@ -14,7 +14,7 @@
     This header file provides implementations for pin APIs for all pins selected in the GUI.
     Generation Information :
         Product Revision  :  PIC10 / PIC12 / PIC16 / PIC18 MCUs - 1.78.1
-        Device            :  PIC18F47K40
+        Device            :  PIC18LF47K40
         Driver Version    :  2.11
     The generated drivers are tested against the following:
         Compiler          :  XC8 2.10 and above
@@ -67,9 +67,9 @@ void PIN_MANAGER_Initialize(void)
     TRISx registers
     */
     TRISE = 0x06;
-    TRISA = 0xCF;
-    TRISB = 0xFF;
-    TRISC = 0x9E;
+    TRISA = 0x07;
+    TRISB = 0x08;
+    TRISC = 0x52;
     TRISD = 0xFC;
 
     /**
@@ -77,7 +77,7 @@ void PIN_MANAGER_Initialize(void)
     */
     ANSELD = 0xFF;
     ANSELC = 0x8C;
-    ANSELB = 0xFF;
+    ANSELB = 0xF1;
     ANSELE = 0x07;
     ANSELA = 0xC8;
 
@@ -125,14 +125,19 @@ void PIN_MANAGER_Initialize(void)
     
 	
     RC0PPS = 0x09;   //RC0->EUSART1:TX1;    
-    RX1PPS = 0x11;   //RC1->EUSART1:RX1;    
-    SSP1CLKPPS = 0x16;   //RC6->MSSP1:SCK1;    
+    SSP2DATPPS = 0x0B;   //RB3->MSSP2:SDI2;    
+    SSP1CLKPPS = 0x16;   //RC6->MSSP1:SCL1;    
     INT0PPS = 0x00;   //RA0->EXT_INT:INT0;    
+    RC4PPS = 0x10;   //RC4->MSSP1:SDA1;    
     INT2PPS = 0x02;   //RA2->EXT_INT:INT2;    
     INT1PPS = 0x01;   //RA1->EXT_INT:INT1;    
-    RC5PPS = 0x10;   //RC5->MSSP1:SDO1;    
-    RC6PPS = 0x0F;   //RC6->MSSP1:SCK1;    
-    SSP1DATPPS = 0x14;   //RC4->MSSP1:SDI1;    
+    SSP1DATPPS = 0x14;   //RC4->MSSP1:SDA1;    
+    SSP2CLKPPS = 0x09;   //RB1->MSSP2:SCK2;    
+    RX1PPS = 0x11;   //RC1->EUSART1:RX1;    
+    RB1PPS = 0x11;   //RB1->MSSP2:SCK2;    
+    RB0PPS = 0x13;   //RB0->TMR0:TMR0;    
+    RB2PPS = 0x12;   //RB2->MSSP2:SDO2;    
+    RC6PPS = 0x0F;   //RC6->MSSP1:SCL1;    
 }
   
 void PIN_MANAGER_IOC(void)

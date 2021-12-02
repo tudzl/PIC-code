@@ -14,7 +14,7 @@
     This source file provides APIs for EUSART1.
     Generation Information :
         Product Revision  :  PIC10 / PIC12 / PIC16 / PIC18 MCUs - 1.78.1
-        Device            :  PIC18F47K40
+        Device            :  PIC18LF47K40
         Driver Version    :  2.1.0
     The generated drivers are tested against the following:
         Compiler          :  XC8 2.10 and above
@@ -76,8 +76,8 @@ void EUSART1_Initialize(void)
     // TX9 8-bit; TX9D 0; SENDB sync_break_complete; TXEN enabled; SYNC asynchronous; BRGH hi_speed; CSRC slave; 
     TX1STA = 0x24;
 
-    // SP1BRGL 25; 
-    SP1BRGL = 0x19;
+    // SP1BRGL 103; 
+    SP1BRGL = 0x67;
 
     // SP1BRGH 0; 
     SP1BRGH = 0x00;

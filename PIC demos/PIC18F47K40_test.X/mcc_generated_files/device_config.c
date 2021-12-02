@@ -14,7 +14,7 @@
     This header file provides implementations for driver APIs for all modules selected in the GUI.
     Generation Information :
         Product Revision  :  PIC10 / PIC12 / PIC16 / PIC18 MCUs - 1.78.1
-        Device            :  PIC18F47K40
+        Device            :  PIC18LF47K40
         Driver Version    :  2.00
     The generated drivers are tested against the following:
         Compiler          :  XC8 2.10 and above or later
@@ -48,7 +48,7 @@
 
 // CONFIG1L
 #pragma config FEXTOSC = OFF    // External Oscillator mode Selection bits->Oscillator not enabled
-#pragma config RSTOSC = HFINTOSC_1MHZ    // Power-up default value for COSC bits->HFINTOSC with HFFRQ = 4 MHz and CDIV = 4:1
+#pragma config RSTOSC = HFINTOSC_64MHZ    // Power-up default value for COSC bits->HFINTOSC with HFFRQ = 64 MHz and CDIV = 1:1
 
 // CONFIG1H
 #pragma config CLKOUTEN = OFF    // Clock Out Enable bit->CLKOUT function is disabled
@@ -62,7 +62,7 @@
 #pragma config BOREN = SBORDIS    // Brown-out Reset Enable bits->Brown-out Reset enabled , SBOREN bit is ignored
 
 // CONFIG2H
-#pragma config BORV = VBOR_2P45    // Brown Out Reset Voltage selection bits->Brown-out Reset Voltage (VBOR) set to 2.45V
+#pragma config BORV = VBOR_190    // Brown Out Reset Voltage selection bits->Brown-out Reset Voltage (VBOR) set to 1.90V
 #pragma config ZCD = OFF    // ZCD Disable bit->ZCD disabled. ZCD can be enabled by setting the ZCDSEN bit of ZCDCON
 #pragma config PPS1WAY = ON    // PPSLOCK bit One-Way Set Enable bit->PPSLOCK bit can be cleared and set only once; PPS registers remain locked after one clear/set cycle
 #pragma config STVREN = ON    // Stack Full/Underflow Reset Enable bit->Stack full/underflow will cause Reset
