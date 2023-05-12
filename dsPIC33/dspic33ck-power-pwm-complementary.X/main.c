@@ -2,6 +2,7 @@
 /**
   Generated main.c file from MPLAB Code Configurator
   @Version: 
+    *V1.3 improved PWM freq, duty adjust function, added ADC AN1 contol-->PWM duty cycle 
     *V1.2 PWM freq, duty display bugs, added ADC contol-->PWM freq 
     *V1.1 added debug printf support, run cnt, 
    
@@ -154,7 +155,8 @@
  * PWM8H      | TP46      | (n/a) (3) | PWM Generator #8 output HIGH
  * PWM8L      | TP48      | (n/a) (3) | PWM Generator #8 output LOW
  * ---------------------------------------------------------------------
- *
+ * ADC_AN0     TP12       P2(Pot)
+ * ADC_AN1     TP6        P1(Pot)
  * (1): not available on dsPIC33CK DP PIM; Shared with on-board push button SW1
  * (2): not available on dsPIC33CH DP PIM Master Core; Shared with on-board push button SW1
  * (3): not available on dsPIC33CH DP PIM Master Core
@@ -178,7 +180,7 @@ uint32_t loop_interval = 0;
 uint8_t Btn_press_cnt = 0;
 //ADC
 uint16_t ADC_conversion = 0;
-uint16_t ADC_conversion2 = 0;
+uint16_t ADC_conversion1 = 0;
 float ADC_Voltage = 0 ;
 float Ref_voltage= 3.25;
 //PWM related vars
@@ -191,6 +193,7 @@ uint32_t PWM_Duty_32bit = 0; // e.g. 55 represents 55%
 float PWM_Duty_P= 0; // in %
 //user functions
 uint8_t Set_PWM_period(uint16_t Per_ns);
+uint8_t Set_PWM_duty(uint16_t duty_cyc);
 
 /*
                          Main application
@@ -200,7 +203,10 @@ int main(void)
     
     // initialize the device
     SYSTEM_Initialize();
-    printf("dsPIC33CK256MP506 PWM ADC demo v1.2 by Zell \r\n");
+    printf("dsPIC33CK256MP506 PWM ADC demo v1.2\r\n");
+    printf("<Last edit: 12.May.2023 by Zell >\r\n");
+    printf("<Main function: Use POT P1,P2 and user Btn to adjust the PWM frequency and duty cycle >\r\n");
+    
     // User PWM Initialization
     PWM_Initialize();
     printf("#>: PWM Initialized !\r\n");
@@ -215,9 +221,10 @@ int main(void)
     
     loop_interval = printf_interval/tmr_interval ;
     loop_interval = loop_interval*1000;
-    printf("#>: Debug printf loop interval time: %d ms. loop_interval: %d \r\n", printf_interval, loop_interval);
+    printf("#>: Debug printf loop interval time: %d ms. loop_interval: %lu \r\n", printf_interval, loop_interval);
     printf("#>: main loop starts !\r\n");
     uint16_t Per_tmp_value = 0;
+    uint16_t Duty_tmp_value = 0;
     uint8_t res = 0;
     /* main loop */
     while (1)
@@ -245,7 +252,7 @@ int main(void)
                 if(my_pg->PGxPER.value == 20000)   // IF period is set to 200 kHz)
                 {
                     my_pg->PGxPER.value = 4000;    // set period to 1 MHz
-                    my_pg->PGxDC.value = 2000;     // rescale to 25% duty cycle
+                    my_pg->PGxDC.value = 2000;     // rescale to 50% duty cycle
                 }
                 else
                 {
@@ -253,16 +260,25 @@ int main(void)
                     my_pg->PGxDC.value = 5000;     // rescale to 25% duty cycle
                 }
             }
-            else{
+            else if (0==Btn_press_cnt%2){//use ADC POT to adjust PWM frequency , cnt 6 first enter this case
                 if (ADC_conversion>0){
                     Per_tmp_value = ADC_conversion*4; //12bit to 14 bit nS
                     res = Set_PWM_period(Per_tmp_value) ;
                     if (res)
-                         printf("##>:Set new PWM period based on ADC Pot2 value failed @ %d ns!\r\n",Per_tmp_value);
+                         printf("##>:Set new PWM period based on ADC Pot2 value failed @ %u ns!\r\n",Per_tmp_value);
                     else 
-                        printf("##>:Setting new PWM period based on ADC Pot2 successful!@ %d ns\r\n",Per_tmp_value);
+                        printf("##>:Setting new PWM period based on ADC Pot2 successful!@ %u ns.\r\n",Per_tmp_value);
                 }
-               
+            }
+            else {//use ADC POT to adjust  duty
+                if (ADC_conversion1>0){
+                    Duty_tmp_value = ADC_conversion1*4; //12bit to 14 bit 
+                    res = Set_PWM_duty(Duty_tmp_value) ;
+                    if (res)
+                         printf("##>:Set new PWM Duty based on ADC Pot2 value failed @ %u ns!\r\n",Duty_tmp_value);
+                    else 
+                        printf("##>:Setting new PWM Duty based on ADC Pot2 successful!@ %u ns.\r\n",Duty_tmp_value);
+                }
                 
             }
 
@@ -307,8 +323,8 @@ int main(void)
         ADC_Voltage = Ref_voltage * (float)ADC_conversion/4095.0; //12bit
         printf("#>: ADC_AN0: %4.3f V\r\n", ADC_Voltage);
         ADC1_SoftwareTriggerDisable();
-        ADC_conversion2 = ADC1_ConversionResultGet(channel_AN1);
-        ADC_Voltage = Ref_voltage * (float)ADC_conversion2/4095.0; //12bit
+        ADC_conversion1 = ADC1_ConversionResultGet(channel_AN1);
+        ADC_Voltage = Ref_voltage * (float)ADC_conversion1/4095.0; //12bit
         printf("#>: ADC_AN1: %4.3f V\r\n", ADC_Voltage);
         ADC1_Disable(); 
         
@@ -330,16 +346,41 @@ uint8_t Set_PWM_period(uint16_t Per_ns){
         return 1;
     tmp_val = Per_ns*4;
     my_pg->PGxPER.value = tmp_val ;
-    printf("#>: PGxPER.value = %d,", tmp_val);
+    printf("#>:Calc  PGxPER.value = %u,", tmp_val);
     tmp_val =(uint16_t) (PWM_Duty_P*tmp_val/100); //bugs!
     //tmp_val = tmp_val/2;
     my_pg->PGxDC.value = tmp_val;//make sure the duty unchanged!
-    printf("PGxDC.value = %d.\r\n\r\n", tmp_val);
+    printf("PGxDC.value = %u.\r\n\r\n", tmp_val);
     my_pg->PGxSTAT.bits.UPDREQ = 1;  // Set Update Bit (apply new timing to PWM generator)
     DBGPIN_Clear(); 
     return 0; //successful
     
 }
+
+uint8_t Set_PWM_duty(uint16_t duty_cyc){
+    //Max period is 16.384us, which is 61.035Khz
+    uint16_t tmp_val = 0;
+    DBGPIN_Set();                   // Set debug pin as oscilloscope trigger
+    if (duty_cyc> 16383)
+        return 1;
+    
+    tmp_val = duty_cyc*4;
+    if (tmp_val>my_pg->PGxPER.value){
+        tmp_val=my_pg->PGxPER.value;
+         printf("#>:Set PGxDC.value to max = %u.\r\n", tmp_val);
+        // return 1; // duty larger than period
+          my_pg->PGxDC.value = tmp_val;//make sure the duty unchanged!
+    }
+    else {
+        my_pg->PGxDC.value = tmp_val;//make sure the duty unchanged!
+        printf("#>:Calc PGxDC.value = %u.\r\n", tmp_val);
+    }
+    my_pg->PGxSTAT.bits.UPDREQ = 1;  // Set Update Bit (apply new timing to PWM generator)
+    DBGPIN_Clear(); 
+    return 0; //successful
+    
+}
+
 
 /**
  End of File
