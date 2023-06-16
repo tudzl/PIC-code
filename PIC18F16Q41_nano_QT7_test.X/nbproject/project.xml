@@ -3,13 +3,9 @@
     <type>com.microchip.mplab.nbide.embedded.makeproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
-            <name>PIC18F16Q41_nano_QT7_test</name>
-            <creation-uuid>df815c6a-0d41-44ae-b003-fb6dfda4e1bb</creation-uuid>
+            <name>PIC18F56Q71_demo_test_CNANO</name>
+            <creation-uuid>7dae55e1-1be0-4194-96ef-658aa50e90a2</creation-uuid>
             <make-project-type>0</make-project-type>
-            <c-extensions>c</c-extensions>
-            <cpp-extensions/>
-            <header-extensions>h</header-extensions>
-            <asminc-extensions/>
             <sourceEncoding>ISO-8859-1</sourceEncoding>
             <make-dep-projects/>
             <sourceRootList/>

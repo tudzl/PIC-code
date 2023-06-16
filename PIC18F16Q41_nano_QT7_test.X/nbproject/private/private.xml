@@ -2,12 +2,14 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group name="Group SAMC_PIC24_test"/>
-        <group name="PMSM"/>
         <group name="AVR Group">
-            <file>file:/D:/PIC%20Projects/PIC18F16Q41%20nano%20test.X/main.c</file>
-            <file>file:/D:/PIC%20Projects/PIC18F16Q41%20nano%20test.X/mcc_generated_files/mtouch/mtouch_sensor.c</file>
-            <file>file:/C:/Program%20Files/Microchip/xc8/v2.32/pic/sources/c99/common/abs.c</file>
+            <file>file:/D:/PIC%20Projects/PIC18F56Q71_demo_test_CNANO.X/mcc_generated_files/timer/src/tmr0.c</file>
+            <file>file:/D:/PIC%20Projects/PIC18F56Q71_demo_test_CNANO.X/mcc_generated_files/capture/src/ccp1.c</file>
+            <file>file:/D:/PIC%20Projects/PIC18F56Q71_demo_test_CNANO.X/mcc_generated_files/system/src/system.c</file>
+            <file>file:/D:/PIC%20Projects/PIC18F56Q71_demo_test_CNANO.X/mcc_generated_files/system/src/interrupt.c</file>
+            <file>file:/D:/PIC%20Projects/PIC18F56Q71_demo_test_CNANO.X/mcc_generated_files/system/src/clock.c</file>
+            <file>file:/D:/PIC%20Projects/PIC18F56Q71_demo_test_CNANO.X/main.c</file>
+            <file>file:/D:/PIC%20Projects/PIC18F56Q71_demo_test_CNANO.X/mcc_generated_files/pwm/src/pwm1_16bit.c</file>
         </group>
     </open-files>
 </project-private>

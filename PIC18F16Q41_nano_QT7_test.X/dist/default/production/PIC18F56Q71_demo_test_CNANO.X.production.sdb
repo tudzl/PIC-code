@@ -1,0 +1,1367 @@
+[p GLOBOPT AUTOSTATIC IEEE_FLT IEEE_DBL LFSROK EMI_WORD ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 18F56Q71 ]
+[d frameptr 1249 ]
+"80 D:\PIC Projects\PIC18F56Q71_demo_test_CNANO.X/PIC18F56Q71_CNANO_header.h
+[v _STATUS_LED_toggle STATUS_LED_toggle `T(v  1 s 1 STATUS_LED_toggle ]
+"1 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\abs.c
+[v _abs abs `(i  1 e 2 0 ]
+"7 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\aldiv.c
+[v ___aldiv __aldiv `(l  1 e 4 0 ]
+"7 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+"7 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\awmod.c
+[v ___awmod __awmod `(i  1 e 2 0 ]
+"152 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\doprnt.c
+[v _pad pad `(v  1 s 1 pad ]
+"470
+[v _dtoa dtoa `(v  1 s 1 dtoa ]
+"917
+[v _utoa utoa `(v  1 s 1 utoa ]
+"1048
+[v _vfpfcnvrt vfpfcnvrt `(v  1 s 1 vfpfcnvrt ]
+"1546
+[v _vfprintf vfprintf `(i  1 e 2 0 ]
+"4 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\fleq.c
+[v ___fleq __fleq `(b  1 e 0 0 ]
+"62 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\float.c
+[v ___ftpack __ftpack `(f  1 e 4 0 ]
+"86 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\ftadd.c
+[v ___ftadd __ftadd `(f  1 e 4 0 ]
+"54 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\ftdiv.c
+[v ___ftdiv __ftdiv `(f  1 e 4 0 ]
+"62 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\ftmul.c
+[v ___ftmul __ftmul `(f  1 e 4 0 ]
+"19 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\ftsub.c
+[v ___ftsub __ftsub `(f  1 e 4 0 ]
+"7 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\lwdiv.c
+[v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
+"7 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\lwmod.c
+[v ___lwmod __lwmod `(ui  1 e 2 0 ]
+"8 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\nf_fputc.c
+[v _fputc fputc `(i  1 e 2 0 ]
+"8 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\nf_fputs.c
+[v _fputs fputs `(i  1 e 2 0 ]
+"5 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\printf.c
+[v _printf printf `(i  1 e 2 0 ]
+"10 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"245
+[v ___flsub __flsub `(d  1 e 4 0 ]
+"11 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\sprcdiv.c
+[v ___fldiv __fldiv `(d  1 e 4 0 ]
+"8 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\sprcmul.c
+[v ___flmul __flmul `(d  1 e 4 0 ]
+"15 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\Umul32.c
+[v ___lmul __lmul `(ul  1 e 4 0 ]
+"91 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\Umul64.c
+[v ___omul __omul `(uo  1 e 8 0 ]
+"66 D:\PIC Projects\PIC18F56Q71_demo_test_CNANO.X\main.c
+[v _main main `(i  1 e 2 0 ]
+"58 D:\PIC Projects\PIC18F56Q71_demo_test_CNANO.X\mcc_generated_files/capture/src/ccp1.c
+[v _CCP1_DefaultCallBack CCP1_DefaultCallBack `(v  1 s 1 CCP1_DefaultCallBack ]
+"84
+[v _CCP1_Initialize CCP1_Initialize `(v  1 e 1 0 ]
+"119
+[v _CCP1_CaptureISR CCP1_CaptureISR `IIH(v  1 e 1 0 ]
+"136
+[v _CCP1_SetCallBack CCP1_SetCallBack `(v  1 e 1 0 ]
+"50 D:\PIC Projects\PIC18F56Q71_demo_test_CNANO.X\mcc_generated_files/pwm/src/pwm1_16bit.c
+[v _PWM1_16BIT_RC1_Initialize PWM1_16BIT_RC1_Initialize `(v  1 e 1 0 ]
+"121
+[v _PWM1_16BIT_RC1_Enable PWM1_16BIT_RC1_Enable `(v  1 e 1 0 ]
+"126
+[v _PWM1_16BIT_RC1_Disable PWM1_16BIT_RC1_Disable `(v  1 e 1 0 ]
+"155
+[v _PWM1_16BIT_RC1_PWMI_ISR PWM1_16BIT_RC1_PWMI_ISR `IIH(v  1 e 1 0 ]
+"172
+[v _PWM1_16BIT_RC1_PWMPI_ISR PWM1_16BIT_RC1_PWMPI_ISR `IIH(v  1 e 1 0 ]
+"179
+[v _PWM1_16BIT_RC1_Slice1Output1_SetInterruptHandler PWM1_16BIT_RC1_Slice1Output1_SetInterruptHandler `(v  1 e 1 0 ]
+"184
+[v _PWM1_16BIT_RC1_Slice1Output2_SetInterruptHandler PWM1_16BIT_RC1_Slice1Output2_SetInterruptHandler `(v  1 e 1 0 ]
+"189
+[v _PWM1_16BIT_RC1_Period_SetInterruptHandler PWM1_16BIT_RC1_Period_SetInterruptHandler `(v  1 e 1 0 ]
+"194
+[v _PWM1_16BIT_RC1_Slice1Output1_DefaultInterruptHandler PWM1_16BIT_RC1_Slice1Output1_DefaultInterruptHandler `(v  1 s 1 PWM1_16BIT_RC1_Slice1Output1_DefaultInterruptHandler ]
+"200
+[v _PWM1_16BIT_RC1_Slice1Output2_DefaultInterruptHandler PWM1_16BIT_RC1_Slice1Output2_DefaultInterruptHandler `(v  1 s 1 PWM1_16BIT_RC1_Slice1Output2_DefaultInterruptHandler ]
+"206
+[v _PWM1_16BIT_RC1_Period_DefaultInterruptHandler PWM1_16BIT_RC1_Period_DefaultInterruptHandler `(v  1 s 1 PWM1_16BIT_RC1_Period_DefaultInterruptHandler ]
+"37 D:\PIC Projects\PIC18F56Q71_demo_test_CNANO.X\mcc_generated_files/system/src/clock.c
+[v _CLOCK_Initialize CLOCK_Initialize `(v  1 e 1 0 ]
+"42 D:\PIC Projects\PIC18F56Q71_demo_test_CNANO.X\mcc_generated_files/system/src/interrupt.c
+[v _INTERRUPT_Initialize INTERRUPT_Initialize `(v  1 e 1 0 ]
+"93
+[v _Default_ISR Default_ISR `IIH(v  1 e 1 0 ]
+"106
+[v _INT0_ISR INT0_ISR `IIH(v  1 e 1 0 ]
+"115
+[v _INT0_CallBack INT0_CallBack `(v  1 e 1 0 ]
+"124
+[v _INT0_SetInterruptHandler INT0_SetInterruptHandler `(v  1 e 1 0 ]
+"128
+[v _INT0_DefaultInterruptHandler INT0_DefaultInterruptHandler `(v  1 e 1 0 ]
+"140
+[v _INT1_ISR INT1_ISR `IIH(v  1 e 1 0 ]
+"149
+[v _INT1_CallBack INT1_CallBack `(v  1 e 1 0 ]
+"158
+[v _INT1_SetInterruptHandler INT1_SetInterruptHandler `(v  1 e 1 0 ]
+"162
+[v _INT1_DefaultInterruptHandler INT1_DefaultInterruptHandler `(v  1 e 1 0 ]
+"174
+[v _INT2_ISR INT2_ISR `IIH(v  1 e 1 0 ]
+"183
+[v _INT2_CallBack INT2_CallBack `(v  1 e 1 0 ]
+"192
+[v _INT2_SetInterruptHandler INT2_SetInterruptHandler `(v  1 e 1 0 ]
+"196
+[v _INT2_DefaultInterruptHandler INT2_DefaultInterruptHandler `(v  1 e 1 0 ]
+"38 D:\PIC Projects\PIC18F56Q71_demo_test_CNANO.X\mcc_generated_files/system/src/pins.c
+[v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
+"43 D:\PIC Projects\PIC18F56Q71_demo_test_CNANO.X\mcc_generated_files/system/src/system.c
+[v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
+"56
+[v _CPU_Initialize CPU_Initialize `(v  1 e 1 0 ]
+"52 D:\PIC Projects\PIC18F56Q71_demo_test_CNANO.X\mcc_generated_files/timer/src/tmr0.c
+[v _Timer0_Initialize Timer0_Initialize `(v  1 e 1 0 ]
+"79
+[v _Timer0_Start Timer0_Start `(v  1 e 1 0 ]
+"84
+[v _Timer0_Stop Timer0_Stop `(v  1 e 1 0 ]
+"114
+[v _Timer0_PeriodCountSet Timer0_PeriodCountSet `(v  1 e 1 0 ]
+"119
+[v _Timer0_OverflowISR Timer0_OverflowISR `IIH(v  1 e 1 0 ]
+"133
+[v _Timer0_OverflowCallbackRegister Timer0_OverflowCallbackRegister `(v  1 e 1 0 ]
+"138
+[v _Timer0_DefaultOverflowCallback Timer0_DefaultOverflowCallback `(v  1 s 1 Timer0_DefaultOverflowCallback ]
+"58 D:\PIC Projects\PIC18F56Q71_demo_test_CNANO.X\mcc_generated_files/timer/src/tmr1.c
+[v _Timer1_Initialize Timer1_Initialize `(v  1 e 1 0 ]
+"86
+[v _Timer1_Start Timer1_Start `(v  1 e 1 0 ]
+"92
+[v _Timer1_Stop Timer1_Stop `(v  1 e 1 0 ]
+"113
+[v _Timer1_Write Timer1_Write `(v  1 e 1 0 ]
+"140
+[v _Timer1_PeriodCountSet Timer1_PeriodCountSet `(v  1 e 1 0 ]
+"155
+[v _Timer1_OverflowISR Timer1_OverflowISR `IIH(v  1 e 1 0 ]
+"168
+[v _Timer1_OverflowCallbackRegister Timer1_OverflowCallbackRegister `(v  1 e 1 0 ]
+"173
+[v _Timer1_DefaultOverflowCallback Timer1_DefaultOverflowCallback `(v  1 s 1 Timer1_DefaultOverflowCallback ]
+"184
+[v _Timer1_GateISR Timer1_GateISR `IIH(v  1 e 1 0 ]
+"95 D:\PIC Projects\PIC18F56Q71_demo_test_CNANO.X\mcc_generated_files/uart/src/uart2.c
+[v _UART2_Initialize UART2_Initialize `(v  1 e 1 0 ]
+"136
+[v _UART2_Deinitialize UART2_Deinitialize `(v  1 e 1 0 ]
+"164
+[v _UART2_TransmitEnable UART2_TransmitEnable `T(v  1 e 1 0 ]
+"169
+[v _UART2_TransmitDisable UART2_TransmitDisable `T(v  1 e 1 0 ]
+"194
+[v _UART2_AutoBaudSet UART2_AutoBaudSet `T(v  1 e 1 0 ]
+"207
+[v _UART2_AutoBaudQuery UART2_AutoBaudQuery `T(a  1 e 1 0 ]
+"227
+[v _UART2_IsRxReady UART2_IsRxReady `(a  1 e 1 0 ]
+"232
+[v _UART2_IsTxReady UART2_IsTxReady `(a  1 e 1 0 ]
+"237
+[v _UART2_IsTxDone UART2_IsTxDone `(a  1 e 1 0 ]
+"242
+[v _UART2_ErrorGet UART2_ErrorGet `(ui  1 e 2 0 ]
+"266
+[v _UART2_Read UART2_Read `(uc  1 e 1 0 ]
+"272
+[v _UART2_Write UART2_Write `(v  1 e 1 0 ]
+"284
+[v _putch putch `(v  1 e 1 0 ]
+"294
+[v _UART2_DefaultFramingErrorCallback UART2_DefaultFramingErrorCallback `(v  1 s 1 UART2_DefaultFramingErrorCallback ]
+"299
+[v _UART2_DefaultOverrunErrorCallback UART2_DefaultOverrunErrorCallback `(v  1 s 1 UART2_DefaultOverrunErrorCallback ]
+"304
+[v _UART2_DefaultParityErrorCallback UART2_DefaultParityErrorCallback `(v  1 s 1 UART2_DefaultParityErrorCallback ]
+"309
+[v _UART2_FramingErrorCallbackRegister UART2_FramingErrorCallbackRegister `(v  1 e 1 0 ]
+"317
+[v _UART2_OverrunErrorCallbackRegister UART2_OverrunErrorCallbackRegister `(v  1 e 1 0 ]
+"325
+[v _UART2_ParityErrorCallbackRegister UART2_ParityErrorCallbackRegister `(v  1 e 1 0 ]
+"3896 C:/Users/A66402/.mchp_packs/Microchip/PIC18F-Q_DFP/1.18.389/xc8\pic\include\proc\pic18f56q71.h
+[v _ACTCON ACTCON `VEuc  1 e 1 @172 ]
+"3966
+[v _OSCCON1 OSCCON1 `VEuc  1 e 1 @173 ]
+"4106
+[v _OSCCON3 OSCCON3 `VEuc  1 e 1 @175 ]
+"4146
+[v _OSCTUNE OSCTUNE `VEuc  1 e 1 @176 ]
+"4204
+[v _OSCFRQ OSCFRQ `VEuc  1 e 1 @177 ]
+"4406
+[v _OSCEN OSCEN `VEuc  1 e 1 @179 ]
+"4463
+[v _PRLOCK PRLOCK `VEuc  1 e 1 @180 ]
+"4483
+[v _SCANPR SCANPR `VEuc  1 e 1 @181 ]
+"4551
+[v _DMA1PR DMA1PR `VEuc  1 e 1 @182 ]
+"4619
+[v _DMA2PR DMA2PR `VEuc  1 e 1 @183 ]
+"4687
+[v _DMA3PR DMA3PR `VEuc  1 e 1 @184 ]
+"4755
+[v _DMA4PR DMA4PR `VEuc  1 e 1 @185 ]
+"4823
+[v _MAINPR MAINPR `VEuc  1 e 1 @190 ]
+"4891
+[v _ISRPR ISRPR `VEuc  1 e 1 @191 ]
+"10703
+[v _LATA LATA `VEuc  1 e 1 @320 ]
+"10765
+[v _LATB LATB `VEuc  1 e 1 @321 ]
+"10827
+[v _LATC LATC `VEuc  1 e 1 @322 ]
+[s S1710 . 1 `uc 1 LATC0 1 0 :1:0 
+`uc 1 LATC1 1 0 :1:1 
+`uc 1 LATC2 1 0 :1:2 
+`uc 1 LATC3 1 0 :1:3 
+`uc 1 LATC4 1 0 :1:4 
+`uc 1 LATC5 1 0 :1:5 
+`uc 1 LATC6 1 0 :1:6 
+`uc 1 LATC7 1 0 :1:7 
+]
+"10844
+[u S1719 . 1 `S1710 1 . 1 0 ]
+[v _LATCbits LATCbits `VES1719  1 e 1 @322 ]
+"10889
+[v _LATD LATD `VEuc  1 e 1 @323 ]
+"10951
+[v _LATE LATE `VEuc  1 e 1 @324 ]
+[s S1737 . 1 `uc 1 LATE0 1 0 :1:0 
+`uc 1 LATE1 1 0 :1:1 
+`uc 1 LATE2 1 0 :1:2 
+]
+"10963
+[u S1741 . 1 `S1737 1 . 1 0 ]
+[v _LATEbits LATEbits `VES1741  1 e 1 @324 ]
+"10983
+[v _LATF LATF `VEuc  1 e 1 @325 ]
+"11045
+[v _TRISA TRISA `VEuc  1 e 1 @328 ]
+"11107
+[v _TRISB TRISB `VEuc  1 e 1 @329 ]
+"11169
+[v _TRISC TRISC `VEuc  1 e 1 @330 ]
+"11231
+[v _TRISD TRISD `VEuc  1 e 1 @331 ]
+"11293
+[v _TRISE TRISE `VEuc  1 e 1 @332 ]
+"11325
+[v _TRISF TRISF `VEuc  1 e 1 @333 ]
+"14346
+[v _RB4PPS RB4PPS `VEuc  1 e 1 @525 ]
+"14596
+[v _RC1PPS RC1PPS `VEuc  1 e 1 @530 ]
+"14646
+[v _RC2PPS RC2PPS `VEuc  1 e 1 @531 ]
+"14846
+[v _RC6PPS RC6PPS `VEuc  1 e 1 @535 ]
+"16616
+[v _CCP1PPS CCP1PPS `VEuc  1 e 1 @591 ]
+"18506
+[v _U2RXPPS U2RXPPS `VEuc  1 e 1 @628 ]
+"19010
+[v _RB2I2C RB2I2C `VEuc  1 e 1 @645 ]
+"19142
+[v _RB1I2C RB1I2C `VEuc  1 e 1 @646 ]
+"19274
+[v _RC4I2C RC4I2C `VEuc  1 e 1 @647 ]
+"19406
+[v _RC3I2C RC3I2C `VEuc  1 e 1 @648 ]
+"21982
+[v _U2RXB U2RXB `VEuc  1 e 1 @692 ]
+"22020
+[v _U2TXB U2TXB `VEuc  1 e 1 @694 ]
+"22065
+[v _U2P1L U2P1L `VEuc  1 e 1 @696 ]
+"22092
+[v _U2P2L U2P2L `VEuc  1 e 1 @698 ]
+"22119
+[v _U2P3L U2P3L `VEuc  1 e 1 @700 ]
+"22139
+[v _U2CON0 U2CON0 `VEuc  1 e 1 @702 ]
+[s S1404 . 1 `uc 1 MODE0 1 0 :1:0 
+`uc 1 MODE1 1 0 :1:1 
+`uc 1 MODE2 1 0 :1:2 
+`uc 1 MODE3 1 0 :1:3 
+]
+"22172
+[s S1409 . 1 `uc 1 U2MODE 1 0 :4:0 
+`uc 1 U2RXEN 1 0 :1:4 
+`uc 1 U2TXEN 1 0 :1:5 
+`uc 1 U2ABDEN 1 0 :1:6 
+`uc 1 U2BRGS 1 0 :1:7 
+]
+[s S1415 . 1 `uc 1 U2MODE0 1 0 :1:0 
+`uc 1 U2MODE1 1 0 :1:1 
+`uc 1 U2MODE2 1 0 :1:2 
+`uc 1 U2MODE3 1 0 :1:3 
+]
+[s S1420 . 1 `uc 1 MODE 1 0 :4:0 
+`uc 1 RXEN 1 0 :1:4 
+`uc 1 TXEN 1 0 :1:5 
+`uc 1 ABDEN 1 0 :1:6 
+`uc 1 BRGS 1 0 :1:7 
+]
+[u S1426 . 1 `S1404 1 . 1 0 `S1409 1 . 1 0 `S1415 1 . 1 0 `S1420 1 . 1 0 ]
+[v _U2CON0bits U2CON0bits `VES1426  1 e 1 @702 ]
+"22267
+[v _U2CON1 U2CON1 `VEuc  1 e 1 @703 ]
+[s S1368 . 1 `uc 1 SENDB 1 0 :1:0 
+`uc 1 BRKOVR 1 0 :1:1 
+`uc 1 . 1 0 :1:2 
+`uc 1 RXBIMD 1 0 :1:3 
+`uc 1 WUE 1 0 :1:4 
+`uc 1 . 1 0 :2:5 
+`uc 1 ON 1 0 :1:7 
+]
+"22292
+[s S1376 . 1 `uc 1 U2SENDB 1 0 :1:0 
+`uc 1 U2BRKOVR 1 0 :1:1 
+`uc 1 . 1 0 :1:2 
+`uc 1 U2RXBIMD 1 0 :1:3 
+`uc 1 U2WUE 1 0 :1:4 
+`uc 1 . 1 0 :2:5 
+`uc 1 U2ON 1 0 :1:7 
+]
+[u S1384 . 1 `S1368 1 . 1 0 `S1376 1 . 1 0 ]
+[v _U2CON1bits U2CON1bits `VES1384  1 e 1 @703 ]
+"22347
+[v _U2CON2 U2CON2 `VEuc  1 e 1 @704 ]
+"22486
+[v _U2BRGL U2BRGL `VEuc  1 e 1 @705 ]
+"22506
+[v _U2BRGH U2BRGH `VEuc  1 e 1 @706 ]
+"22526
+[v _U2FIFO U2FIFO `VEuc  1 e 1 @707 ]
+[s S1522 . 1 `uc 1 RXBF 1 0 :1:0 
+`uc 1 RXBE 1 0 :1:1 
+`uc 1 XON 1 0 :1:2 
+`uc 1 RXIDL 1 0 :1:3 
+`uc 1 TXBF 1 0 :1:4 
+`uc 1 TXBE 1 0 :1:5 
+`uc 1 STPMD 1 0 :1:6 
+`uc 1 TXWRE 1 0 :1:7 
+]
+"22561
+[s S1531 . 1 `uc 1 U2RXBF 1 0 :1:0 
+`uc 1 U2RXBE 1 0 :1:1 
+`uc 1 U2XON 1 0 :1:2 
+`uc 1 U2RXIDL 1 0 :1:3 
+`uc 1 U2TXBF 1 0 :1:4 
+`uc 1 U2TXBE 1 0 :1:5 
+`uc 1 U2STPMD 1 0 :1:6 
+`uc 1 U2TXWRE 1 0 :1:7 
+]
+[s S1540 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 U2RCIDL 1 0 :1:3 
+]
+[s S1543 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 RCIDL 1 0 :1:3 
+]
+[u S1546 . 1 `S1522 1 . 1 0 `S1531 1 . 1 0 `S1540 1 . 1 0 `S1543 1 . 1 0 ]
+[v _U2FIFObits U2FIFObits `VES1546  1 e 1 @707 ]
+"22656
+[v _U2UIR U2UIR `VEuc  1 e 1 @708 ]
+[s S1454 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 ABDIE 1 0 :1:2 
+`uc 1 . 1 0 :3:3 
+`uc 1 ABDIF 1 0 :1:6 
+`uc 1 WUIF 1 0 :1:7 
+]
+"22677
+[s S1460 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 U2ABDIE 1 0 :1:2 
+`uc 1 . 1 0 :3:3 
+`uc 1 U2ABDIF 1 0 :1:6 
+`uc 1 U2WUIF 1 0 :1:7 
+]
+[u S1466 . 1 `S1454 1 . 1 0 `S1460 1 . 1 0 ]
+[v _U2UIRbits U2UIRbits `VES1466  1 e 1 @708 ]
+"22712
+[v _U2ERRIR U2ERRIR `VEuc  1 e 1 @709 ]
+[s S1482 . 1 `uc 1 TXCIF 1 0 :1:0 
+`uc 1 RXFOIF 1 0 :1:1 
+`uc 1 RXBKIF 1 0 :1:2 
+`uc 1 FERIF 1 0 :1:3 
+`uc 1 CERIF 1 0 :1:4 
+`uc 1 ABDOVF 1 0 :1:5 
+`uc 1 PERIF 1 0 :1:6 
+`uc 1 TXMTIF 1 0 :1:7 
+]
+"22739
+[s S1491 . 1 `uc 1 U2TXCIF 1 0 :1:0 
+`uc 1 U2RXFOIF 1 0 :1:1 
+`uc 1 U2RXBKIF 1 0 :1:2 
+`uc 1 U2FERIF 1 0 :1:3 
+`uc 1 U2CERIF 1 0 :1:4 
+`uc 1 U2ABDOVF 1 0 :1:5 
+`uc 1 U2PERIF 1 0 :1:6 
+`uc 1 U2TXMTIF 1 0 :1:7 
+]
+[u S1500 . 1 `S1482 1 . 1 0 `S1491 1 . 1 0 ]
+[v _U2ERRIRbits U2ERRIRbits `VES1500  1 e 1 @709 ]
+"22824
+[v _U2ERRIE U2ERRIE `VEuc  1 e 1 @710 ]
+"22936
+[v _TMR1L TMR1L `VEuc  1 e 1 @786 ]
+"23006
+[v _TMR1H TMR1H `VEuc  1 e 1 @787 ]
+"23076
+[v _T1CON T1CON `VEuc  1 e 1 @788 ]
+[s S836 . 1 `uc 1 ON 1 0 :1:0 
+`uc 1 RD16 1 0 :1:1 
+`uc 1 NOT_SYNC 1 0 :1:2 
+`uc 1 . 1 0 :1:3 
+`uc 1 CKPS 1 0 :2:4 
+]
+"23112
+[s S842 . 1 `uc 1 TMR1ON 1 0 :1:0 
+`uc 1 T1RD16 1 0 :1:1 
+`uc 1 NOT_T1SYNC 1 0 :1:2 
+`uc 1 . 1 0 :1:3 
+`uc 1 T1CKPS0 1 0 :1:4 
+`uc 1 T1CKPS1 1 0 :1:5 
+]
+[s S849 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 CKPS0 1 0 :1:4 
+`uc 1 CKPS1 1 0 :1:5 
+]
+[s S853 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 RD161 1 0 :1:1 
+]
+[u S856 . 1 `S836 1 . 1 0 `S842 1 . 1 0 `S849 1 . 1 0 `S853 1 . 1 0 ]
+[v _T1CONbits T1CONbits `VES856  1 e 1 @788 ]
+"23266
+[v _T1GCON T1GCON `VEuc  1 e 1 @789 ]
+[s S882 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 GVAL 1 0 :1:2 
+`uc 1 GGO 1 0 :1:3 
+`uc 1 GSPM 1 0 :1:4 
+`uc 1 GTM 1 0 :1:5 
+`uc 1 GPOL 1 0 :1:6 
+`uc 1 GE 1 0 :1:7 
+]
+"23304
+[s S890 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 T1GVAL 1 0 :1:2 
+`uc 1 T1GGO 1 0 :1:3 
+`uc 1 T1GSPM 1 0 :1:4 
+`uc 1 T1GTM 1 0 :1:5 
+`uc 1 T1GPOL 1 0 :1:6 
+`uc 1 T1GE 1 0 :1:7 
+]
+[s S898 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 NOT_DONE 1 0 :1:3 
+]
+[s S901 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 NOT_T1DONE 1 0 :1:3 
+]
+[u S904 . 1 `S882 1 . 1 0 `S890 1 . 1 0 `S898 1 . 1 0 `S901 1 . 1 0 ]
+[v _T1GCONbits T1GCONbits `VES904  1 e 1 @789 ]
+"23480
+[v _T1GATE T1GATE `VEuc  1 e 1 @790 ]
+"23646
+[v _T1CLK T1CLK `VEuc  1 e 1 @791 ]
+"23812
+[v _TMR0L TMR0L `VEuc  1 e 1 @792 ]
+"23950
+[v _TMR0H TMR0H `VEuc  1 e 1 @793 ]
+"24204
+[v _T0CON0 T0CON0 `VEuc  1 e 1 @794 ]
+[s S1069 . 1 `uc 1 OUTPS 1 0 :4:0 
+`uc 1 MD16 1 0 :1:4 
+`uc 1 OUT 1 0 :1:5 
+`uc 1 . 1 0 :1:6 
+`uc 1 EN 1 0 :1:7 
+]
+"24232
+[s S1075 . 1 `uc 1 T0OUTPS 1 0 :4:0 
+`uc 1 T0MD16 1 0 :1:4 
+`uc 1 T0OUT 1 0 :1:5 
+`uc 1 . 1 0 :1:6 
+`uc 1 T0EN 1 0 :1:7 
+]
+[s S1081 . 1 `uc 1 OUTPS0 1 0 :1:0 
+`uc 1 OUTPS1 1 0 :1:1 
+`uc 1 OUTPS2 1 0 :1:2 
+`uc 1 OUTPS3 1 0 :1:3 
+`uc 1 T016BIT 1 0 :1:4 
+]
+[u S1087 . 1 `S1069 1 . 1 0 `S1075 1 . 1 0 `S1081 1 . 1 0 ]
+[v _T0CON0bits T0CON0bits `VES1087  1 e 1 @794 ]
+"24302
+[v _T0CON1 T0CON1 `VEuc  1 e 1 @795 ]
+"26575
+[v _CCPR1L CCPR1L `VEuc  1 e 1 @832 ]
+"26595
+[v _CCPR1H CCPR1H `VEuc  1 e 1 @833 ]
+"26615
+[v _CCP1CON CCP1CON `VEuc  1 e 1 @834 ]
+"26733
+[v _CCP1CAP CCP1CAP `VEuc  1 e 1 @835 ]
+[s S38 . 1 `uc 1 C1TSEL 1 0 :2:0 
+`uc 1 C2TSEL 1 0 :2:2 
+]
+"27075
+[s S41 . 1 `uc 1 C1TSEL0 1 0 :1:0 
+`uc 1 C1TSEL1 1 0 :1:1 
+`uc 1 C2TSEL0 1 0 :1:2 
+`uc 1 C2TSEL1 1 0 :1:3 
+]
+[u S46 . 1 `S38 1 . 1 0 `S41 1 . 1 0 ]
+[v _CCPTMRS0bits CCPTMRS0bits `VES46  1 e 1 @844 ]
+"38767
+[v _ANSELA ANSELA `VEuc  1 e 1 @1024 ]
+"38829
+[v _WPUA WPUA `VEuc  1 e 1 @1025 ]
+"38891
+[v _ODCONA ODCONA `VEuc  1 e 1 @1026 ]
+"38953
+[v _SLRCONA SLRCONA `VEuc  1 e 1 @1027 ]
+"39015
+[v _INLVLA INLVLA `VEuc  1 e 1 @1028 ]
+"39077
+[v _IOCAP IOCAP `VEuc  1 e 1 @1029 ]
+"39139
+[v _IOCAN IOCAN `VEuc  1 e 1 @1030 ]
+"39201
+[v _IOCAF IOCAF `VEuc  1 e 1 @1031 ]
+"39263
+[v _ANSELB ANSELB `VEuc  1 e 1 @1032 ]
+"39325
+[v _WPUB WPUB `VEuc  1 e 1 @1033 ]
+"39387
+[v _ODCONB ODCONB `VEuc  1 e 1 @1034 ]
+"39449
+[v _SLRCONB SLRCONB `VEuc  1 e 1 @1035 ]
+"39511
+[v _INLVLB INLVLB `VEuc  1 e 1 @1036 ]
+"39573
+[v _IOCBP IOCBP `VEuc  1 e 1 @1037 ]
+"39635
+[v _IOCBN IOCBN `VEuc  1 e 1 @1038 ]
+"39697
+[v _IOCBF IOCBF `VEuc  1 e 1 @1039 ]
+"39759
+[v _ANSELC ANSELC `VEuc  1 e 1 @1040 ]
+"39821
+[v _WPUC WPUC `VEuc  1 e 1 @1041 ]
+"39883
+[v _ODCONC ODCONC `VEuc  1 e 1 @1042 ]
+"39945
+[v _SLRCONC SLRCONC `VEuc  1 e 1 @1043 ]
+"40007
+[v _INLVLC INLVLC `VEuc  1 e 1 @1044 ]
+"40069
+[v _IOCCP IOCCP `VEuc  1 e 1 @1045 ]
+"40131
+[v _IOCCN IOCCN `VEuc  1 e 1 @1046 ]
+"40193
+[v _IOCCF IOCCF `VEuc  1 e 1 @1047 ]
+"40255
+[v _ANSELD ANSELD `VEuc  1 e 1 @1048 ]
+"40317
+[v _WPUD WPUD `VEuc  1 e 1 @1049 ]
+"40379
+[v _ODCOND ODCOND `VEuc  1 e 1 @1050 ]
+"40441
+[v _SLRCOND SLRCOND `VEuc  1 e 1 @1051 ]
+"40503
+[v _INLVLD INLVLD `VEuc  1 e 1 @1052 ]
+"40565
+[v _ANSELE ANSELE `VEuc  1 e 1 @1056 ]
+"40597
+[v _WPUE WPUE `VEuc  1 e 1 @1057 ]
+"40635
+[v _ODCONE ODCONE `VEuc  1 e 1 @1058 ]
+"40667
+[v _SLRCONE SLRCONE `VEuc  1 e 1 @1059 ]
+"40699
+[v _INLVLE INLVLE `VEuc  1 e 1 @1060 ]
+"40737
+[v _IOCEP IOCEP `VEuc  1 e 1 @1061 ]
+"40758
+[v _IOCEN IOCEN `VEuc  1 e 1 @1062 ]
+"40779
+[v _IOCEF IOCEF `VEuc  1 e 1 @1063 ]
+"40800
+[v _ANSELF ANSELF `VEuc  1 e 1 @1064 ]
+"40862
+[v _WPUF WPUF `VEuc  1 e 1 @1065 ]
+"40924
+[v _ODCONF ODCONF `VEuc  1 e 1 @1066 ]
+"40986
+[v _SLRCONF SLRCONF `VEuc  1 e 1 @1067 ]
+"41048
+[v _INLVLF INLVLF `VEuc  1 e 1 @1068 ]
+"41110
+[v _IOCWP IOCWP `VEuc  1 e 1 @1085 ]
+"41172
+[v _IOCWN IOCWN `VEuc  1 e 1 @1086 ]
+"41234
+[v _IOCWF IOCWF `VEuc  1 e 1 @1087 ]
+"42244
+[v _IVTLOCK IVTLOCK `VEuc  1 e 1 @1113 ]
+[s S430 . 1 `uc 1 IVTLOCKED 1 0 :1:0 
+]
+"42254
+[u S432 . 1 `S430 1 . 1 0 ]
+"42254
+"42254
+[v _IVTLOCKbits IVTLOCKbits `VES432  1 e 1 @1113 ]
+"42450
+[v _IVTBASEL IVTBASEL `VEuc  1 e 1 @1117 ]
+"42512
+[v _IVTBASEH IVTBASEH `VEuc  1 e 1 @1118 ]
+"42574
+[v _IVTBASEU IVTBASEU `VEuc  1 e 1 @1119 ]
+"42618
+[v _PWM1ERS PWM1ERS `VEuc  1 e 1 @1120 ]
+"42664
+[v _PWM1CLK PWM1CLK `VEuc  1 e 1 @1121 ]
+"42716
+[v _PWM1LDS PWM1LDS `VEuc  1 e 1 @1122 ]
+"42769
+[v _PWM1PRL PWM1PRL `VEuc  1 e 1 @1123 ]
+"42789
+[v _PWM1PRH PWM1PRH `VEuc  1 e 1 @1124 ]
+"42809
+[v _PWM1CPRE PWM1CPRE `VEuc  1 e 1 @1125 ]
+"42829
+[v _PWM1PIPOS PWM1PIPOS `VEuc  1 e 1 @1126 ]
+"42849
+[v _PWM1GIR PWM1GIR `VEuc  1 e 1 @1127 ]
+[s S195 . 1 `uc 1 S1P1IF 1 0 :1:0 
+`uc 1 S1P2IF 1 0 :1:1 
+]
+"42860
+[u S198 . 1 `S195 1 . 1 0 ]
+"42860
+"42860
+[v _PWM1GIRbits PWM1GIRbits `VES198  1 e 1 @1127 ]
+"42875
+[v _PWM1GIE PWM1GIE `VEuc  1 e 1 @1128 ]
+[s S271 . 1 `uc 1 S1P1IE 1 0 :1:0 
+`uc 1 S1P2IE 1 0 :1:1 
+]
+"42886
+[u S274 . 1 `S271 1 . 1 0 ]
+"42886
+"42886
+[v _PWM1GIEbits PWM1GIEbits `VES274  1 e 1 @1128 ]
+"42901
+[v _PWM1CON PWM1CON `VEuc  1 e 1 @1129 ]
+[s S256 . 1 `uc 1 ERSNOW 1 0 :1:0 
+`uc 1 ERSPOL 1 0 :1:1 
+`uc 1 LD 1 0 :1:2 
+`uc 1 . 1 0 :4:3 
+`uc 1 EN 1 0 :1:7 
+]
+"42915
+[u S262 . 1 `S256 1 . 1 0 ]
+"42915
+"42915
+[v _PWM1CONbits PWM1CONbits `VES262  1 e 1 @1129 ]
+"42940
+[v _PWM1S1CFG PWM1S1CFG `VEuc  1 e 1 @1130 ]
+"43006
+[v _PWM1S1P1L PWM1S1P1L `VEuc  1 e 1 @1131 ]
+"43026
+[v _PWM1S1P1H PWM1S1P1H `VEuc  1 e 1 @1132 ]
+"43053
+[v _PWM1S1P2L PWM1S1P2L `VEuc  1 e 1 @1133 ]
+"43073
+[v _PWM1S1P2H PWM1S1P2H `VEuc  1 e 1 @1134 ]
+[s S440 . 1 `uc 1 SPI1RXIP 1 0 :1:0 
+`uc 1 SPI1TXIP 1 0 :1:1 
+`uc 1 SPI1IP 1 0 :1:2 
+`uc 1 TMR2IP 1 0 :1:3 
+`uc 1 TMR1IP 1 0 :1:4 
+`uc 1 TMR1GIP 1 0 :1:5 
+`uc 1 CCP1IP 1 0 :1:6 
+`uc 1 TMR0IP 1 0 :1:7 
+]
+"44437
+[u S449 . 1 `S440 1 . 1 0 ]
+"44437
+"44437
+[v _IPR3bits IPR3bits `VES449  1 e 1 @1183 ]
+[s S461 . 1 `uc 1 U1RXIP 1 0 :1:0 
+`uc 1 U1TXIP 1 0 :1:1 
+`uc 1 U1EIP 1 0 :1:2 
+`uc 1 U1IP 1 0 :1:3 
+`uc 1 TMR3IP 1 0 :1:4 
+`uc 1 TMR3GIP 1 0 :1:5 
+`uc 1 PWM1PIP 1 0 :1:6 
+`uc 1 PWM1IP 1 0 :1:7 
+]
+"44499
+[u S470 . 1 `S461 1 . 1 0 ]
+"44499
+"44499
+[v _IPR4bits IPR4bits `VES470  1 e 1 @1184 ]
+[s S79 . 1 `uc 1 SPI1RXIE 1 0 :1:0 
+`uc 1 SPI1TXIE 1 0 :1:1 
+`uc 1 SPI1IE 1 0 :1:2 
+`uc 1 TMR2IE 1 0 :1:3 
+`uc 1 TMR1IE 1 0 :1:4 
+`uc 1 TMR1GIE 1 0 :1:5 
+`uc 1 CCP1IE 1 0 :1:6 
+`uc 1 TMR0IE 1 0 :1:7 
+]
+"45071
+[u S88 . 1 `S79 1 . 1 0 ]
+"45071
+"45071
+[v _PIE3bits PIE3bits `VES88  1 e 1 @1194 ]
+[s S204 . 1 `uc 1 U1RXIE 1 0 :1:0 
+`uc 1 U1TXIE 1 0 :1:1 
+`uc 1 U1EIE 1 0 :1:2 
+`uc 1 U1IE 1 0 :1:3 
+`uc 1 TMR3IE 1 0 :1:4 
+`uc 1 TMR3GIE 1 0 :1:5 
+`uc 1 PWM1PIE 1 0 :1:6 
+`uc 1 PWM1IE 1 0 :1:7 
+]
+"45133
+[u S213 . 1 `S204 1 . 1 0 ]
+"45133
+"45133
+[v _PIE4bits PIE4bits `VES213  1 e 1 @1195 ]
+[s S482 . 1 `uc 1 INT0IF 1 0 :1:0 
+`uc 1 ADCH1IF 1 0 :1:1 
+`uc 1 ADIF 1 0 :1:2 
+`uc 1 ACTIF 1 0 :1:3 
+`uc 1 C1IF 1 0 :1:4 
+`uc 1 ADCH2IF 1 0 :1:5 
+`uc 1 ADCH3IF 1 0 :1:6 
+`uc 1 ADCH4IF 1 0 :1:7 
+]
+"45586
+[u S491 . 1 `S482 1 . 1 0 ]
+"45586
+"45586
+[v _PIR1bits PIR1bits `VES491  1 e 1 @1203 ]
+[s S58 . 1 `uc 1 SPI1RXIF 1 0 :1:0 
+`uc 1 SPI1TXIF 1 0 :1:1 
+`uc 1 SPI1IF 1 0 :1:2 
+`uc 1 TMR2IF 1 0 :1:3 
+`uc 1 TMR1IF 1 0 :1:4 
+`uc 1 TMR1GIF 1 0 :1:5 
+`uc 1 CCP1IF 1 0 :1:6 
+`uc 1 TMR0IF 1 0 :1:7 
+]
+"45705
+[u S67 . 1 `S58 1 . 1 0 ]
+"45705
+"45705
+[v _PIR3bits PIR3bits `VES67  1 e 1 @1205 ]
+[s S174 . 1 `uc 1 U1RXIF 1 0 :1:0 
+`uc 1 U1TXIF 1 0 :1:1 
+`uc 1 U1EIF 1 0 :1:2 
+`uc 1 U1IF 1 0 :1:3 
+`uc 1 TMR3IF 1 0 :1:4 
+`uc 1 TMR3GIF 1 0 :1:5 
+`uc 1 PWM1PIF 1 0 :1:6 
+`uc 1 PWM1IF 1 0 :1:7 
+]
+"45767
+[u S183 . 1 `S174 1 . 1 0 ]
+"45767
+"45767
+[v _PIR4bits PIR4bits `VES183  1 e 1 @1206 ]
+[s S513 . 1 `uc 1 INT1IF 1 0 :1:0 
+`uc 1 CLC7IF 1 0 :1:1 
+`uc 1 CWG1IF 1 0 :1:2 
+`uc 1 NCO1IF 1 0 :1:3 
+`uc 1 DMA2SCNTIF 1 0 :1:4 
+`uc 1 DMA2DCNTIF 1 0 :1:5 
+`uc 1 DMA2ORIF 1 0 :1:6 
+`uc 1 DMA2AIF 1 0 :1:7 
+]
+"45881
+[u S522 . 1 `S513 1 . 1 0 ]
+"45881
+"45881
+[v _PIR6bits PIR6bits `VES522  1 e 1 @1208 ]
+[s S544 . 1 `uc 1 INT2IF 1 0 :1:0 
+`uc 1 CLC8IF 1 0 :1:1 
+`uc 1 TU16BIF 1 0 :1:2 
+`uc 1 TMR4IF 1 0 :1:3 
+`uc 1 DMA4SCNTIF 1 0 :1:4 
+`uc 1 DMA4DCNTIF 1 0 :1:5 
+`uc 1 DMA4ORIF 1 0 :1:6 
+`uc 1 DMA4AIF 1 0 :1:7 
+]
+"46096
+[u S553 . 1 `S544 1 . 1 0 ]
+"46096
+"46096
+[v _PIR10bits PIR10bits `VES553  1 e 1 @1212 ]
+[s S402 . 1 `uc 1 INT0EDG 1 0 :1:0 
+`uc 1 INT1EDG 1 0 :1:1 
+`uc 1 INT2EDG 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 IPEN 1 0 :1:5 
+`uc 1 GIEL 1 0 :1:6 
+`uc 1 GIE 1 0 :1:7 
+]
+"46161
+[s S410 . 1 `uc 1 . 1 0 :7:0 
+`uc 1 GIEH 1 0 :1:7 
+]
+"46161
+[u S413 . 1 `S402 1 . 1 0 `S410 1 . 1 0 ]
+"46161
+"46161
+[v _INTCON0bits INTCON0bits `VES413  1 e 1 @1238 ]
+"47065
+[v _PRODL PRODL `VEuc  1 e 1 @1267 ]
+"47085
+[v _PRODH PRODH `VEuc  1 e 1 @1268 ]
+"51988
+[v _GIE GIE `VEb  1 e 0 @9911 ]
+"118 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\doprnt.c
+[v _prec prec `i  1 s 2 prec ]
+[v _width width `i  1 s 2 width ]
+"119
+[v _flags flags `uc  1 s 1 flags ]
+"144
+[v _dbuf dbuf `[32]uc  1 s 32 dbuf ]
+"43 D:\PIC Projects\PIC18F56Q71_demo_test_CNANO.X\main.c
+[v _sys_cnt sys_cnt `us  1 e 2 0 ]
+"44
+[v _sys_cnt_8bitLSB sys_cnt_8bitLSB `uc  1 e 1 0 ]
+"45
+[v _sys_cnt_8bitMSB sys_cnt_8bitMSB `uc  1 e 1 0 ]
+"46
+[v _Flg_tmp Flg_tmp `uc  1 e 1 0 ]
+"49
+[v _CCP_IF_flag CCP_IF_flag `uc  1 e 1 0 ]
+"52
+[v _CCP1_tck_current CCP1_tck_current `us  1 e 2 0 ]
+"53
+[v _CCP1_tck_pre CCP1_tck_pre `us  1 e 2 0 ]
+"54
+[v _CCP1_tck_current_buf CCP1_tck_current_buf `us  1 e 2 0 ]
+"55
+[v _CCP1_tck_pre_buf CCP1_tck_pre_buf `us  1 e 2 0 ]
+"58
+[v _CCP_data_valid CCP_data_valid `uc  1 e 1 0 ]
+"59
+[v _CCP1_time_diff CCP1_time_diff `us  1 e 2 0 ]
+"62
+[v _Timer0_flag Timer0_flag `uc  1 e 1 0 ]
+"46 D:\PIC Projects\PIC18F56Q71_demo_test_CNANO.X\mcc_generated_files/capture/src/ccp1.c
+[v _CCP1_CallBack CCP1_CallBack `*.37(v  1 s 2 CCP1_CallBack ]
+"43 D:\PIC Projects\PIC18F56Q71_demo_test_CNANO.X\mcc_generated_files/pwm/src/pwm1_16bit.c
+[v _PWM1_16BIT_RC1_Slice1Output1_InterruptHandler PWM1_16BIT_RC1_Slice1Output1_InterruptHandler `*.37(v  1 s 2 PWM1_16BIT_RC1_Slice1Output1_InterruptHandler ]
+"44
+[v _PWM1_16BIT_RC1_Slice1Output2_InterruptHandler PWM1_16BIT_RC1_Slice1Output2_InterruptHandler `*.37(v  1 s 2 PWM1_16BIT_RC1_Slice1Output2_InterruptHandler ]
+"45
+[v _PWM1_16BIT_RC1_Period_InterruptHandler PWM1_16BIT_RC1_Period_InterruptHandler `*.37(v  1 s 2 PWM1_16BIT_RC1_Period_InterruptHandler ]
+"38 D:\PIC Projects\PIC18F56Q71_demo_test_CNANO.X\mcc_generated_files/system/src/interrupt.c
+[v _INT0_InterruptHandler INT0_InterruptHandler `*.37(v  1 e 2 0 ]
+"39
+[v _INT1_InterruptHandler INT1_InterruptHandler `*.37(v  1 e 2 0 ]
+"40
+[v _INT2_InterruptHandler INT2_InterruptHandler `*.37(v  1 e 2 0 ]
+"38 D:\PIC Projects\PIC18F56Q71_demo_test_CNANO.X\mcc_generated_files/timer/src/tmr0.c
+[v _timerTMR0ReloadVal16bit timerTMR0ReloadVal16bit `VEus  1 e 2 0 ]
+"49
+[v _Timer0_OverflowCallback Timer0_OverflowCallback `*.37(v  1 s 2 Timer0_OverflowCallback ]
+"44 D:\PIC Projects\PIC18F56Q71_demo_test_CNANO.X\mcc_generated_files/timer/src/tmr1.c
+[v _timer1ReloadVal timer1ReloadVal `VEus  1 e 2 0 ]
+"55
+[v _Timer1_OverflowCallback Timer1_OverflowCallback `*.37(v  1 s 2 Timer1_OverflowCallback ]
+[s S1331 . 1 `uc 1 perr 1 0 :1:0 
+`uc 1 ferr 1 0 :1:1 
+`uc 1 oerr 1 0 :1:2 
+`uc 1 reserved 1 0 :5:3 
+]
+"77 D:\PIC Projects\PIC18F56Q71_demo_test_CNANO.X\mcc_generated_files/uart/src/uart2.c
+[u S1336 . 2 `S1331 1 . 1 0 `ui 1 status 2 0 ]
+[v _uart2RxLastError uart2RxLastError `VES1336  1 e 2 0 ]
+"83
+[v _UART2_FramingErrorHandler UART2_FramingErrorHandler `*.37(v  1 e 2 0 ]
+"84
+[v _UART2_OverrunErrorHandler UART2_OverrunErrorHandler `*.37(v  1 e 2 0 ]
+"85
+[v _UART2_ParityErrorHandler UART2_ParityErrorHandler `*.37(v  1 e 2 0 ]
+"66 D:\PIC Projects\PIC18F56Q71_demo_test_CNANO.X\main.c
+[v _main main `(i  1 e 2 0 ]
+{
+"188
+} 0
+"5 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\printf.c
+[v _printf printf `(i  1 e 2 0 ]
+{
+"8
+[v printf@ap ap `[1]*.39v  1 a 2 43 ]
+"5
+[v printf@fmt fmt `*.32Cuc  1 p 2 35 ]
+"13
+} 0
+"1546 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\doprnt.c
+[v _vfprintf vfprintf `(i  1 e 2 0 ]
+{
+"1549
+[v vfprintf@cfmt cfmt `*.32uc  1 a 2 33 ]
+[s S2283 _IO_FILE 0 ]
+"1546
+[v vfprintf@fp fp `*.2S2283  1 p 2 27 ]
+[v vfprintf@fmt fmt `*.32Cuc  1 p 2 29 ]
+[v vfprintf@ap ap `*.39*.39v  1 p 2 31 ]
+"1569
+} 0
+"1048
+[v _vfpfcnvrt vfpfcnvrt `(v  1 s 1 vfpfcnvrt ]
+{
+[u S2301 . 4 `i 1 sint 2 0 `ui 1 uint 2 0 `*.2v 1 vp 3 0 `d 1 f 4 0 ]
+"1059
+[v vfpfcnvrt@convarg convarg `S2301  1 a 4 21 ]
+"1050
+[v vfpfcnvrt@cp cp `*.32uc  1 a 2 25 ]
+[s S2283 _IO_FILE 0 ]
+"1048
+[v vfpfcnvrt@fp fp `*.2S2283  1 p 2 13 ]
+[v vfpfcnvrt@fmt fmt `*.39*.32uc  1 p 2 15 ]
+[v vfpfcnvrt@ap ap `*.39*.39v  1 p 2 17 ]
+"1543
+} 0
+"917
+[v _utoa utoa `(v  1 s 1 utoa ]
+{
+"919
+[v utoa@i i `i  1 a 2 8 ]
+[v utoa@p p `i  1 a 2 6 ]
+[v utoa@w w `i  1 a 2 4 ]
+[s S2283 _IO_FILE 0 ]
+"917
+[v utoa@fp fp `*.2S2283  1 p 2 0 ]
+[v utoa@d d `ui  1 p 2 2 ]
+"947
+} 0
+"7 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\lwmod.c
+[v ___lwmod __lwmod `(ui  1 e 2 0 ]
+{
+"10
+[v ___lwmod@counter counter `uc  1 a 1 26 ]
+"7
+[v ___lwmod@dividend dividend `ui  1 p 2 22 ]
+[v ___lwmod@divisor divisor `ui  1 p 2 24 ]
+"25
+} 0
+"7 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\lwdiv.c
+[v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
+{
+"10
+[v ___lwdiv@quotient quotient `ui  1 a 2 27 ]
+"11
+[v ___lwdiv@counter counter `uc  1 a 1 26 ]
+"7
+[v ___lwdiv@dividend dividend `ui  1 p 2 22 ]
+[v ___lwdiv@divisor divisor `ui  1 p 2 24 ]
+"30
+} 0
+"470 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\doprnt.c
+[v _dtoa dtoa `(v  1 s 1 dtoa ]
+{
+"473
+[v dtoa@i i `i  1 a 2 11 ]
+[v dtoa@w w `i  1 a 2 8 ]
+[v dtoa@p p `i  1 a 2 6 ]
+"472
+[v dtoa@s s `uc  1 a 1 10 ]
+[s S2283 _IO_FILE 0 ]
+"470
+[v dtoa@fp fp `*.2S2283  1 p 2 0 ]
+[v dtoa@d d `i  1 p 2 2 ]
+"527
+} 0
+"152
+[v _pad pad `(v  1 s 1 pad ]
+{
+"154
+[v pad@w w `i  1 a 2 49 ]
+[v pad@i i `i  1 a 2 47 ]
+[s S2283 _IO_FILE 0 ]
+"152
+[v pad@fp fp `*.2S2283  1 p 2 40 ]
+[v pad@buf buf `*.39uc  1 p 2 42 ]
+[v pad@p p `i  1 p 2 44 ]
+"183
+} 0
+"8 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\nf_fputs.c
+[v _fputs fputs `(i  1 e 2 0 ]
+{
+"11
+[v fputs@i i `i  1 a 2 38 ]
+"10
+[v fputs@c c `uc  1 a 1 37 ]
+"8
+[v fputs@s s `*.39Cuc  1 p 2 33 ]
+[u S2262 . 3 `*.2uc 1 buffer 3 0 `*.2Cuc 1 source 3 0 ]
+[s S2265 _IO_FILE 12 `S2262 1 . 3 0 `i 1 count 2 3 `[3]uc 1 ungetbuf 3 5 `i 1 ungetcnt 2 8 `i 1 limit 2 10 ]
+[v fputs@fp fp `*.2S2265  1 p 2 35 ]
+"19
+} 0
+"8 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\nf_fputc.c
+[v _fputc fputc `(i  1 e 2 0 ]
+{
+[v fputc@c c `i  1 p 2 24 ]
+[u S2262 . 3 `*.2uc 1 buffer 3 0 `*.2Cuc 1 source 3 0 ]
+[s S2265 _IO_FILE 12 `S2262 1 . 3 0 `i 1 count 2 3 `[3]uc 1 ungetbuf 3 5 `i 1 ungetcnt 2 8 `i 1 limit 2 10 ]
+[v fputc@fp fp `*.2S2265  1 p 2 26 ]
+"24
+} 0
+"284 D:\PIC Projects\PIC18F56Q71_demo_test_CNANO.X\mcc_generated_files/uart/src/uart2.c
+[v _putch putch `(v  1 e 1 0 ]
+{
+[v putch@txData txData `uc  1 a 1 wreg ]
+[v putch@txData txData `uc  1 a 1 wreg ]
+[v putch@txData txData `uc  1 a 1 23 ]
+"288
+} 0
+"272
+[v _UART2_Write UART2_Write `(v  1 e 1 0 ]
+{
+[v UART2_Write@txData txData `uc  1 a 1 wreg ]
+[v UART2_Write@txData txData `uc  1 a 1 wreg ]
+"274
+[v UART2_Write@txData txData `uc  1 a 1 22 ]
+"275
+} 0
+"232
+[v _UART2_IsTxReady UART2_IsTxReady `(a  1 e 1 0 ]
+{
+"235
+} 0
+"1 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\abs.c
+[v _abs abs `(i  1 e 2 0 ]
+{
+[v abs@a a `i  1 p 2 28 ]
+"4
+} 0
+"7 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\awmod.c
+[v ___awmod __awmod `(i  1 e 2 0 ]
+{
+"10
+[v ___awmod@sign sign `uc  1 a 1 27 ]
+[v ___awmod@counter counter `uc  1 a 1 26 ]
+"7
+[v ___awmod@dividend dividend `i  1 p 2 22 ]
+[v ___awmod@divisor divisor `i  1 p 2 24 ]
+"34
+} 0
+"7 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+{
+"10
+[v ___awdiv@quotient quotient `i  1 a 2 28 ]
+"11
+[v ___awdiv@sign sign `uc  1 a 1 27 ]
+[v ___awdiv@counter counter `uc  1 a 1 26 ]
+"7
+[v ___awdiv@dividend dividend `i  1 p 2 22 ]
+[v ___awdiv@divisor divisor `i  1 p 2 24 ]
+"41
+} 0
+"7 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\aldiv.c
+[v ___aldiv __aldiv `(l  1 e 4 0 ]
+{
+"10
+[v ___aldiv@quotient quotient `l  1 a 4 32 ]
+"11
+[v ___aldiv@sign sign `uc  1 a 1 31 ]
+[v ___aldiv@counter counter `uc  1 a 1 30 ]
+"7
+[v ___aldiv@dividend dividend `l  1 p 4 22 ]
+[v ___aldiv@divisor divisor `l  1 p 4 26 ]
+"41
+} 0
+"86 D:\PIC Projects\PIC18F56Q71_demo_test_CNANO.X\mcc_generated_files/timer/src/tmr1.c
+[v _Timer1_Start Timer1_Start `(v  1 e 1 0 ]
+{
+"90
+} 0
+"43 D:\PIC Projects\PIC18F56Q71_demo_test_CNANO.X\mcc_generated_files/system/src/system.c
+[v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
+{
+"54
+} 0
+"95 D:\PIC Projects\PIC18F56Q71_demo_test_CNANO.X\mcc_generated_files/uart/src/uart2.c
+[v _UART2_Initialize UART2_Initialize `(v  1 e 1 0 ]
+{
+"134
+} 0
+"325
+[v _UART2_ParityErrorCallbackRegister UART2_ParityErrorCallbackRegister `(v  1 e 1 0 ]
+{
+[v UART2_ParityErrorCallbackRegister@callbackHandler callbackHandler `*.37(v  1 p 2 22 ]
+"331
+} 0
+"317
+[v _UART2_OverrunErrorCallbackRegister UART2_OverrunErrorCallbackRegister `(v  1 e 1 0 ]
+{
+[v UART2_OverrunErrorCallbackRegister@callbackHandler callbackHandler `*.37(v  1 p 2 22 ]
+"323
+} 0
+"309
+[v _UART2_FramingErrorCallbackRegister UART2_FramingErrorCallbackRegister `(v  1 e 1 0 ]
+{
+[v UART2_FramingErrorCallbackRegister@callbackHandler callbackHandler `*.37(v  1 p 2 22 ]
+"315
+} 0
+"58 D:\PIC Projects\PIC18F56Q71_demo_test_CNANO.X\mcc_generated_files/timer/src/tmr1.c
+[v _Timer1_Initialize Timer1_Initialize `(v  1 e 1 0 ]
+{
+"84
+} 0
+"168
+[v _Timer1_OverflowCallbackRegister Timer1_OverflowCallbackRegister `(v  1 e 1 0 ]
+{
+[v Timer1_OverflowCallbackRegister@CallbackHandler CallbackHandler `*.37(v  1 p 2 22 ]
+"171
+} 0
+"52 D:\PIC Projects\PIC18F56Q71_demo_test_CNANO.X\mcc_generated_files/timer/src/tmr0.c
+[v _Timer0_Initialize Timer0_Initialize `(v  1 e 1 0 ]
+{
+"77
+} 0
+"133
+[v _Timer0_OverflowCallbackRegister Timer0_OverflowCallbackRegister `(v  1 e 1 0 ]
+{
+[v Timer0_OverflowCallbackRegister@CallbackHandler CallbackHandler `*.37(v  1 p 2 22 ]
+"136
+} 0
+"50 D:\PIC Projects\PIC18F56Q71_demo_test_CNANO.X\mcc_generated_files/pwm/src/pwm1_16bit.c
+[v _PWM1_16BIT_RC1_Initialize PWM1_16BIT_RC1_Initialize `(v  1 e 1 0 ]
+{
+"119
+} 0
+"184
+[v _PWM1_16BIT_RC1_Slice1Output2_SetInterruptHandler PWM1_16BIT_RC1_Slice1Output2_SetInterruptHandler `(v  1 e 1 0 ]
+{
+[v PWM1_16BIT_RC1_Slice1Output2_SetInterruptHandler@InterruptHandler InterruptHandler `*.37(v  1 p 2 22 ]
+"187
+} 0
+"179
+[v _PWM1_16BIT_RC1_Slice1Output1_SetInterruptHandler PWM1_16BIT_RC1_Slice1Output1_SetInterruptHandler `(v  1 e 1 0 ]
+{
+[v PWM1_16BIT_RC1_Slice1Output1_SetInterruptHandler@InterruptHandler InterruptHandler `*.37(v  1 p 2 22 ]
+"182
+} 0
+"189
+[v _PWM1_16BIT_RC1_Period_SetInterruptHandler PWM1_16BIT_RC1_Period_SetInterruptHandler `(v  1 e 1 0 ]
+{
+[v PWM1_16BIT_RC1_Period_SetInterruptHandler@InterruptHandler InterruptHandler `*.37(v  1 p 2 22 ]
+"192
+} 0
+"38 D:\PIC Projects\PIC18F56Q71_demo_test_CNANO.X\mcc_generated_files/system/src/pins.c
+[v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
+{
+"147
+} 0
+"42 D:\PIC Projects\PIC18F56Q71_demo_test_CNANO.X\mcc_generated_files/system/src/interrupt.c
+[v _INTERRUPT_Initialize INTERRUPT_Initialize `(v  1 e 1 0 ]
+{
+"46
+[v INTERRUPT_Initialize@state state `a  1 a 1 24 ]
+"91
+} 0
+"192
+[v _INT2_SetInterruptHandler INT2_SetInterruptHandler `(v  1 e 1 0 ]
+{
+[v INT2_SetInterruptHandler@InterruptHandler InterruptHandler `*.37(v  1 p 2 22 ]
+"194
+} 0
+"158
+[v _INT1_SetInterruptHandler INT1_SetInterruptHandler `(v  1 e 1 0 ]
+{
+[v INT1_SetInterruptHandler@InterruptHandler InterruptHandler `*.37(v  1 p 2 22 ]
+"160
+} 0
+"124
+[v _INT0_SetInterruptHandler INT0_SetInterruptHandler `(v  1 e 1 0 ]
+{
+[v INT0_SetInterruptHandler@InterruptHandler InterruptHandler `*.37(v  1 p 2 22 ]
+"126
+} 0
+"56 D:\PIC Projects\PIC18F56Q71_demo_test_CNANO.X\mcc_generated_files/system/src/system.c
+[v _CPU_Initialize CPU_Initialize `(v  1 e 1 0 ]
+{
+"78
+} 0
+"37 D:\PIC Projects\PIC18F56Q71_demo_test_CNANO.X\mcc_generated_files/system/src/clock.c
+[v _CLOCK_Initialize CLOCK_Initialize `(v  1 e 1 0 ]
+{
+"53
+} 0
+"84 D:\PIC Projects\PIC18F56Q71_demo_test_CNANO.X\mcc_generated_files/capture/src/ccp1.c
+[v _CCP1_Initialize CCP1_Initialize `(v  1 e 1 0 ]
+{
+"111
+} 0
+"136
+[v _CCP1_SetCallBack CCP1_SetCallBack `(v  1 e 1 0 ]
+{
+[v CCP1_SetCallBack@customCallBack customCallBack `*.37(v  1 p 2 22 ]
+"138
+} 0
+"80 D:\PIC Projects\PIC18F56Q71_demo_test_CNANO.X/PIC18F56Q71_CNANO_header.h
+[v _STATUS_LED_toggle STATUS_LED_toggle `T(v  1 s 1 STATUS_LED_toggle ]
+{
+"83
+} 0
+"121 D:\PIC Projects\PIC18F56Q71_demo_test_CNANO.X\mcc_generated_files/pwm/src/pwm1_16bit.c
+[v _PWM1_16BIT_RC1_Enable PWM1_16BIT_RC1_Enable `(v  1 e 1 0 ]
+{
+"124
+} 0
+"126
+[v _PWM1_16BIT_RC1_Disable PWM1_16BIT_RC1_Disable `(v  1 e 1 0 ]
+{
+"129
+} 0
+"119 D:\PIC Projects\PIC18F56Q71_demo_test_CNANO.X\mcc_generated_files/capture/src/ccp1.c
+[v _CCP1_CaptureISR CCP1_CaptureISR `IIH(v  1 e 1 0 ]
+{
+[s S100 . 2 `uc 1 ccpr1l 1 0 `uc 1 ccpr1h 1 1 ]
+"121
+[s S103 . 2 `us 1 ccpr1_16Bit 2 0 ]
+[u S105 CCPR1Reg_tag 2 `S100 1 . 2 0 `S103 1 . 2 0 ]
+[v CCP1_CaptureISR@module module `S105  1 a 2 4 ]
+"134
+} 0
+"58
+[v _CCP1_DefaultCallBack CCP1_DefaultCallBack `(v  1 s 1 CCP1_DefaultCallBack ]
+{
+[v CCP1_DefaultCallBack@capturedValue capturedValue `us  1 p 2 0 ]
+"82
+} 0
+"155 D:\PIC Projects\PIC18F56Q71_demo_test_CNANO.X\mcc_generated_files/pwm/src/pwm1_16bit.c
+[v _PWM1_16BIT_RC1_PWMI_ISR PWM1_16BIT_RC1_PWMI_ISR `IIH(v  1 e 1 0 ]
+{
+"170
+} 0
+"200
+[v _PWM1_16BIT_RC1_Slice1Output2_DefaultInterruptHandler PWM1_16BIT_RC1_Slice1Output2_DefaultInterruptHandler `(v  1 s 1 PWM1_16BIT_RC1_Slice1Output2_DefaultInterruptHandler ]
+{
+"204
+} 0
+"194
+[v _PWM1_16BIT_RC1_Slice1Output1_DefaultInterruptHandler PWM1_16BIT_RC1_Slice1Output1_DefaultInterruptHandler `(v  1 s 1 PWM1_16BIT_RC1_Slice1Output1_DefaultInterruptHandler ]
+{
+"198
+} 0
+"172
+[v _PWM1_16BIT_RC1_PWMPI_ISR PWM1_16BIT_RC1_PWMPI_ISR `IIH(v  1 e 1 0 ]
+{
+"177
+} 0
+"206
+[v _PWM1_16BIT_RC1_Period_DefaultInterruptHandler PWM1_16BIT_RC1_Period_DefaultInterruptHandler `(v  1 s 1 PWM1_16BIT_RC1_Period_DefaultInterruptHandler ]
+{
+"210
+} 0
+"93 D:\PIC Projects\PIC18F56Q71_demo_test_CNANO.X\mcc_generated_files/system/src/interrupt.c
+[v _Default_ISR Default_ISR `IIH(v  1 e 1 0 ]
+{
+"95
+} 0
+"106
+[v _INT0_ISR INT0_ISR `IIH(v  1 e 1 0 ]
+{
+"112
+} 0
+"115
+[v _INT0_CallBack INT0_CallBack `(v  1 e 1 0 ]
+{
+"122
+} 0
+"128
+[v _INT0_DefaultInterruptHandler INT0_DefaultInterruptHandler `(v  1 e 1 0 ]
+{
+"131
+} 0
+"140
+[v _INT1_ISR INT1_ISR `IIH(v  1 e 1 0 ]
+{
+"146
+} 0
+"149
+[v _INT1_CallBack INT1_CallBack `(v  1 e 1 0 ]
+{
+"156
+} 0
+"162
+[v _INT1_DefaultInterruptHandler INT1_DefaultInterruptHandler `(v  1 e 1 0 ]
+{
+"165
+} 0
+"174
+[v _INT2_ISR INT2_ISR `IIH(v  1 e 1 0 ]
+{
+"180
+} 0
+"183
+[v _INT2_CallBack INT2_CallBack `(v  1 e 1 0 ]
+{
+"190
+} 0
+"196
+[v _INT2_DefaultInterruptHandler INT2_DefaultInterruptHandler `(v  1 e 1 0 ]
+{
+"199
+} 0
+"155 D:\PIC Projects\PIC18F56Q71_demo_test_CNANO.X\mcc_generated_files/timer/src/tmr1.c
+[v _Timer1_OverflowISR Timer1_OverflowISR `IIH(v  1 e 1 0 ]
+{
+"166
+} 0
+"113
+[v _Timer1_Write Timer1_Write `(v  1 e 1 0 ]
+{
+[v Timer1_Write@timerVal timerVal `ui  1 p 2 16 ]
+"133
+} 0
+"138 D:\PIC Projects\PIC18F56Q71_demo_test_CNANO.X\mcc_generated_files/timer/src/tmr0.c
+[v _Timer0_DefaultOverflowCallback Timer0_DefaultOverflowCallback `(v  1 s 1 Timer0_DefaultOverflowCallback ]
+{
+"143
+} 0
+"173 D:\PIC Projects\PIC18F56Q71_demo_test_CNANO.X\mcc_generated_files/timer/src/tmr1.c
+[v _Timer1_DefaultOverflowCallback Timer1_DefaultOverflowCallback `(v  1 s 1 Timer1_DefaultOverflowCallback ]
+{
+"177
+} 0
+"184
+[v _Timer1_GateISR Timer1_GateISR `IIH(v  1 e 1 0 ]
+{
+"188
+} 0
+"119 D:\PIC Projects\PIC18F56Q71_demo_test_CNANO.X\mcc_generated_files/timer/src/tmr0.c
+[v _Timer0_OverflowISR Timer0_OverflowISR `IIH(v  1 e 1 0 ]
+{
+"131
+} 0
