@@ -62,7 +62,7 @@ extern SMPS_2P2Z_T AVG_CM2p2z, VMC2p2z;
 typedef volatile struct
 {
     uint16_t _VDCref;
-    uint16_t _IACref;
+    uint16_t _IACref;  //AC actual current?
     uint16_t _DCBuckset;
     uint16_t _DCBoostset;
     uint16_t _CurrentControllerResult;

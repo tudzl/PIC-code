@@ -106,6 +106,17 @@ int main(void)
     //Drv_PwrCtrl_4SWBB_SetReferenceRaw(VREF_FIXED14P6V); //14.6V
     //    pwr_ctrl_flagbits.inopenloop = 1;
     //pwr_ctrl_flagbits.inclosedloop = 0;
+//    
+//            if (pwr_ctrl_flagbits.inopenloop)
+//        {  
+//            Drv_PwrCtrl_4SWBB_SetMode_ClosedLoop();
+//        }  
+//        else
+//        {  
+//            Drv_PwrCtrl_4SWBB_SetMode_OpenLoop();
+//        }
+    //  PWM_DutyCycleSet(BuckPWM, 0);
+   //  PWM_DutyCycleSet(BoostPWM, 0);
     OS_Scheduler_RunForever();
     // void Drv_PwrCtrl_4SWBB_CtrlLoop(void) 
     //this function contains the AVG Current Controller (every 2nd PWM cycle) 
