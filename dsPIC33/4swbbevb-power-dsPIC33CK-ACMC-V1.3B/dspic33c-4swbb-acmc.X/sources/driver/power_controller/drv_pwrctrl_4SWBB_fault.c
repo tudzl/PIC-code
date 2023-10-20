@@ -129,7 +129,7 @@ void Drv_PwrCtrl_4SWBB_Fault_Check()
   // Vaux out of range check
   FourSWBBFaults.auxVoltageOor = FAULT_CheckRange(&fltobj_4SWBB_VauxOOR, pwr_ctrl_adc_data.drv_adc_val_FB_Vaux, NULL);
 
-  // Iout overcurrent check
+  // Iout overcurrent check, Current_lim_set 
   FourSWBBFaults.outputOverCurrent = FAULT_CheckMax(&fltobj_4SWBB_IoutOC, pwr_ctrl_adc_data.drv_adc_val_FB_Iout, NULL);
 
 }

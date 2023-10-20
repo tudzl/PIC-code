@@ -143,10 +143,10 @@
         <targetDevice>dsPIC33CK256MP506</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>noID</platformTool>
+        <platformTool>pk4hybrid</platformTool>
         <languageToolchain>XC16</languageToolchain>
         <languageToolchainVersion>2.10</languageToolchainVersion>
-        <platform>4</platform>
+        <platform>3</platform>
       </toolsSet>
       <packs>
         <pack name="dsPIC33CK-MP_DFP" vendor="Microchip" version="1.12.354"/>
@@ -674,6 +674,8 @@
         <property key="memories.programmemory" value="true"/>
         <property key="memories.programmemory.ranges" value="0-2beff"/>
         <property key="poweroptions.powerenable" value="false"/>
+        <property key="programmerToGoFilePath"
+                  value="D:/Dev Document/Demo board/power/4swbb dsPIC/4swbbevb-power-average-current-mode-control-1.0.0/dspic33c-4swbb-acmc.X/debug/default/dspic33c-4swbb-acmc_ptg"/>
         <property key="programmerToGoImageName" value="dspic33c-4swbb-acmc_ptg"/>
         <property key="programoptions.donoteraseauxmem" value="false"/>
         <property key="programoptions.eraseb4program" value="true"/>

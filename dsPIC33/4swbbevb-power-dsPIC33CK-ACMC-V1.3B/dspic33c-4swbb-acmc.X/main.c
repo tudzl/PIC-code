@@ -50,6 +50,7 @@
 #include "os/os.h"
 #include "mcc_generated_files/system.h"
 #include "driver/power_controller/drv_pwrctrl_4SWBB.h"
+#include "driver/power_controller/drv_pwrctrl_4SWBB_settings.h"
 #include "device/dev_button.h"
 #include "device/dev_gui_comm.h"
 #include "app/app_HMI.h"
@@ -57,7 +58,8 @@
 #include "driver/drv_led.h"
 /*
                          Main application
- * Version 1.5 Added ADC 4x filtering and CC mode, need test
+ * Version 1.5B Added true CC mode in addtion to original OC protection function need test and improve, 100ms loops
+ * Version 1.5 Added ADC 4x filtering for Vout and Iout, Iin and CC mode, need test and improve
  * Version 1.4B try to add set current limit function, works!
  * Version 1.4 added Iin calc based on 3.3K 470R 47R real values, seems more accurate then original 447mV + 470mv !!! need  nF cap for TP132
  * issue Iin seems smaller than real value? e.g. Iin larger than 0.5A, while 447mV + 470mv/A
@@ -82,12 +84,13 @@
  * CMD:SV14.111V.  SV12.000V. SA04.111A.  SA01.100A.   SA02.001A.
  */
 //copyed from drv_pwrctrl_4SWBB_settings.h"
-#define VREF_FIXED14P6V_FLOAT (float)((4096/8/3.3)*14.6)   //12V, Res Voltage divider 1:8
-#define VREF_FIXED14P6V       (uint16_t) VREF_FIXED14P6V_FLOAT
+//#define VREF_FIXED14P6V_FLOAT (float)((4096/8/3.3)*14.6)   //12V, Res Voltage divider 1:8
+//#define VREF_FIXED14P6V       (uint16_t) VREF_FIXED14P6V_FLOAT
 uint8_t UART_CMD_MD =1;  //1@UART CMD mode instead of factory default GUI Comm mode
 uint8_t Closed_loop_def_EN =1;  // switch to closed loop after ramp up as default
 uint8_t CC_control_mode_EN =1; 
 uint16_t Vout_tmp_raw = 0;
+uint16_t Vout_ref_raw_shadow = 0;
 double V_output = 0;
 double I_output = 0;
 float P_output = 0;
@@ -95,6 +98,7 @@ double V_input = 0;
 double I_input = 0;
 double I_input_filtered = 0;
 float Current_lim_set =0;
+float Constant_Current_set =0;
 float Vout_set =0;
 float P_input = 0;
 uint8_t flag=0;
@@ -104,9 +108,11 @@ int main(void)
 {
     // initialize the device
     SYSTEM_Initialize();
-    printf("< dsPIC33CKMP506 PIM+4SWBB ACMC demo>\r\n");
-    printf("Version 1.5,  Data: 19.Oct.2023 by Zell \r\n");
-    printf("In UART CMD mode, user can send <SV15.123V.> to set the output Voltage!\r\n");
+    printf("< dsPIC33CKMP506 PIM+4SWBB ACMC with CC function demo>\r\n");
+    printf("Version 1.5B,  Data: 20.Oct.2023 by Zell \r\n");
+    printf("In UART CMD mode:  user can send <SV15.123V.> to set the output Voltage!\r\n");
+    printf("                   user can send <SA01.100A.> to set the Current Limit value!\r\n");
+    printf("                   user can send <SC00.300A.> to set the Constant Current value!\r\n");
     printf("Hinweis: always send 6 digits for the number value!!!\r\n");
 
     Dev_Button_Init();
@@ -125,13 +131,24 @@ int main(void)
 
     {
         streamData_enable = 0;
-        printf("Run with  UART CMD mode now, GUI Stream disabled!");
+        printf("Run with  UART CMD mode Set, GUI Stream disabled!\r\n");
     }
     else 
         streamData_enable = 1;
     
+
     
+   Current_lim_set = 3.3 * (float) IOUT_OC_THRESHOLD / 4096.0;
+   Current_lim_set = 5.0 * (Current_lim_set - 1.65) / 2.0;
+   
+    if(CC_control_mode_EN)
+
+    {
+        streamData_enable = 0;
+        printf("Run with CC mode Set with C_lim: %1.3F \r\n",Current_lim_set);
+    }
     
+    printf("---Main loop starts now---!\r\n");
     OS_Scheduler_RunForever();
     // void Drv_PwrCtrl_4SWBB_CtrlLoop(void) 
     //this function contains the AVG Current Controller (every 2nd PWM cycle) 

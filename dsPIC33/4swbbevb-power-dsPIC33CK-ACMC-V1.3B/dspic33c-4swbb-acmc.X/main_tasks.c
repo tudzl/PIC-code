@@ -75,6 +75,7 @@
 #define BG_task_callback_rate 2  // every BG_task_callback_rate times 1s call one
 uint8_t BG_task_call_cnt = 0;
 
+uint16_t CC_active_cnt = 0;
 extern uint8_t CC_control_mode_EN;
 extern uint16_t os_resetCause; //@sw??
 extern uint8_t streamData_enable;
@@ -84,17 +85,20 @@ extern double V_output;
 extern double I_output;
 extern float P_output;
 extern float Current_lim_set;
+extern float Constant_Current_set;
 extern double V_input;
 extern double I_input;
 extern double I_input_filtered;
 extern float P_input;
 extern float Vout_set;
+extern uint16_t Vout_ref_raw_shadow;
 extern uint8_t flag;
 extern PWR_CTRL_FLAGBITS_t pwr_ctrl_flagbits;
 extern uint8_t btn_press_cnt;
 void Switch_GUI_streamData_status(uint8_t btn_cnt);
 void UARTComm_Rcv_Task(void);
-void Task_CC_control( float Vout_set);
+void Task_CC_control(float Vout_set);
+void Task_CL_control(float Vout_set);
 //=======================================================================================================
 //
 //                          put your application specific code in the following functions:
@@ -176,6 +180,7 @@ void Tasks_100ms(void) {
     // put your application specific code here that needs to be called every 100 milliseconds
     App_HMI_Task_100ms();
     Drv_LED_Task_100ms();
+    //Task_CC_control(Vout_set);
     Task_CC_control(Vout_set);
 }
 
@@ -201,23 +206,23 @@ void Tasks_1s(void) {
         vol_adc2 = I_output;
         raw = pwr_ctrl_adc_data.drv_adc_val_FB_Iin;
         //I_input = (float)raw*3.3/4096.0;
-        if(ADFL2CONbits.RDY){
-            I_input_filtered =ADFL2DAT; //AN0 Iin
+        if (ADFL2CONbits.RDY) {
+            I_input_filtered = ADFL2DAT; //AN0 Iin
             I_input_filtered = 3.3 * I_input_filtered / 4096.0;
         }
         vol_adc1 = I_input;
         //I_input_comp = 1 - I_input_filtered / 3.3; // current in mA through R137 470 ohm
-         I_input_comp = (I_input*100.0- I_input_comp*47)/47;
-         I_input_comp = I_input_filtered * 100.0 / 47.0 - I_input_filtered;
+        I_input_comp = (I_input * 100.0 - I_input_comp * 47) / 47;
+        I_input_comp = I_input_filtered * 100.0 / 47.0 - I_input_filtered;
         //I_input_comp = 1 - I_input_filtered / 3.3; // current in mA through R137 470 ohm
         //I_input_comp = I_input_filtered * 100.0 / 47.0 - I_input_filtered; //not accurate when less than 0.8A
         //((((0.4*3)+1.65)*4096)/3.3)
         I_output = 5.0 * (I_output - 1.65) / 2.0;
-        if (I_output < 0)
-            I_output = 0;
+        //        if (I_output < 0)
+        //            I_output = 0;
         P_output = V_output*I_output;
 
-        
+
         printf("Background task running!\r\n");
         printf("Vout: %2.3f V\r\n", V_output);
         //printf("Iout: %2.3f A, V=%1.3f\r\n", I_output, vol_adc2);
@@ -231,8 +236,8 @@ void Tasks_1s(void) {
         I_input_filtered = (I_input_filtered - 0.447) / 0.47;
         if (I_input_filtered < 0)
             I_input_filtered = 0;
-        I_input_filtered = I_input_filtered*1.16;
-        
+        I_input_filtered = I_input_filtered * 1.16;
+
         //I_input =I_input_comp;
         P_in_comp = (float) (V_input * I_input_comp);
         P_input = V_input*I_input_filtered;
@@ -240,30 +245,50 @@ void Tasks_1s(void) {
         //printf(">>Iin: %2.3f A  raw: %d V=%1.3f\r\n",I_input, raw,vol_adc1);
         printf(">>Iin: %2.3f A Flt=%2.3f A\r\n", I_input, I_input_filtered);
         //printf(">>Iin_comp: %2.3f A\r\n", I_input_comp);
-       // printf(">>Pin: %2.3f W\r\n", P_input);
+        // printf(">>Pin: %2.3f W\r\n", P_input);
         printf(">>Pin: %2.3f W\r\n", P_input);
         printf("#>:Power efficiency: %2.1f %%\r\n", 100.0 * P_output / P_input);
-//        if (I_input_filtered<0.75){
-//            printf(">>Pin: %2.3f W\r\n", P_input);
-//            printf("#>:Power efficiency: %2.1f %%\r\n", 100.0 * P_output / P_input);
-//        }
-//        else if (I_input_filtered<1.10){
-//             printf(">>Pin: %2.3f W\r\n", P_in_comp);
-//             printf("#>:PowerEfficiency: %2.1f %%\r\n", 100.0 * P_output / P_in_comp);
-//        }
-//        else {
-//             printf(">>Pin: %2.3f W\r\n", P_input);
-//             printf("#>:Power efficiency: %2.1f %%\r\n", 100.0 * P_output / P_input);
-//        }
-        if (FourSWBBFaults.outputOverCurrent)
+        //        if (I_input_filtered<0.75){
+        //            printf(">>Pin: %2.3f W\r\n", P_input);
+        //            printf("#>:Power efficiency: %2.1f %%\r\n", 100.0 * P_output / P_input);
+        //        }
+        //        else if (I_input_filtered<1.10){
+        //             printf(">>Pin: %2.3f W\r\n", P_in_comp);
+        //             printf("#>:PowerEfficiency: %2.1f %%\r\n", 100.0 * P_output / P_in_comp);
+        //        }
+        //        else {
+        //             printf(">>Pin: %2.3f W\r\n", P_input);
+        //             printf("#>:Power efficiency: %2.1f %%\r\n", 100.0 * P_output / P_input);
+        //        }
+        if (FourSWBBFaults.outputOverCurrent) {
             printf("##>Output OverCurrent at %2.3f A!\r\n", Current_lim_set);
+            V_output = 3.3 * 8 * (float) Vout_ref_raw_shadow / 4096.0;
+            printf("##>Vout_Ref at %2.3f V!\r\n", V_output); //vs Vout_set
+        }
         if (pwr_ctrl_flagbits.inopenloop)
-            printf("Running in open loop control!\r\n");
+            printf("Running in open loop!\r\n");
         if (pwr_ctrl_flagbits.inclosedloop)
-            printf("Running in closed loop control!\r\n" );
-       
-        
-        printf("#>:Flag: %d\r\n", flag);
+            printf("Running in closed loop!\r\n");
+
+        if (pwr_ctrl_flagbits.run) {
+            //printf("#>:PWM Running!\r\n"); //debug only
+            //Drv_PwrCtrl_4SWBB_Stop();
+            //Drv_LED_Off(LED_BOARD_GREEN);
+        } else {
+            printf("#>:PWM Stopped!\r\n");
+            // Drv_PwrCtrl_4SWBB_Start();
+            // Drv_LED_On(LED_BOARD_GREEN);
+        }
+        if(CC_active_cnt){
+            printf("#>:CC control convergence cnt:%d\r\n",CC_active_cnt); //debug info
+            printf("##>Output Constant Current at %2.3f A!\r\n", Constant_Current_set);
+            V_output = 3.3 * 8 * (float) Vout_ref_raw_shadow / 4096.0;
+            printf("##>Vout_Ref lowered to %2.3f V!\r\n", V_output); //vs Vout_set
+        }
+
+
+
+       // printf("#>:Flag: %d\r\n", flag);
         printf("----------------------------\r\n");
         BG_task_call_cnt = 0; //clear count
         flag = 0;
@@ -289,7 +314,7 @@ void Tasks_Background(void) {
             Drv_PwrCtrl_4SWBB_SetMode_OpenLoop();
     }
 
-    
+
 
 }
 
@@ -305,45 +330,123 @@ void Switch_GUI_streamData_status(uint8_t btn_cnt) {
 
 }
 
-void Task_CC_control(float Vout_set){
+void Task_CL_control(float Vout_set) {
     //check for OC, control output voltage for CC mode
-    uint16_t vol_var_raw=0;
-    uint16_t ref_raw_previous=pwr_ctrl_ref_data.drv_val_VoutRef;
-    
-    Vout_set = (4096 * Vout_set / 8.0 / 3.3);
-                //Voltage_float = (4096 * 13.5 / 8.0 / 3.3); //works
-    vol_var_raw = (uint16_t) Vout_set;
-    if (CC_control_mode_EN){
-        if (FourSWBBFaults.outputOverCurrent){
-            
-              
-                //printf(" vol_var_raw=%d\r\n", vol_var_raw);
-                 //try to lower output voltage
-               if (vol_var_raw > 3200) //>20V limit
-                    vol_var_raw = 3100;
+    uint16_t vol_var_raw = 0;
+    uint16_t ref_raw_previous = pwr_ctrl_ref_data.drv_val_VoutRef;
 
-                ref_raw_previous= ref_raw_previous-2;
-                if (ref_raw_previous > (vol_var_raw/2) ) //need improve
+    Vout_set = (4096 * Vout_set / 8.0 / 3.3);
+    //Voltage_float = (4096 * 13.5 / 8.0 / 3.3); //works
+    vol_var_raw = (uint16_t) Vout_set;
+    if (CC_control_mode_EN) {
+        if (FourSWBBFaults.outputOverCurrent) {
+            I_output = 3.3 * (float) pwr_ctrl_adc_data.drv_adc_val_FB_Iout / 4096;
+            I_output = 5.0 * (I_output - 1.65) / 2.0;
+            //printf(" vol_var_raw=%d\r\n", vol_var_raw);
+            //try to lower output voltage
+            if (Current_lim_set > I_output)
+                FourSWBBFaults.outputOverCurrent = 0;
+            else {
+                if (vol_var_raw > 3200) //>20V limit
+                    vol_var_raw = 3100;
+                if (ref_raw_previous > (vol_var_raw * 0.8))
+                    ref_raw_previous = ref_raw_previous - 2;
+                else ref_raw_previous--;
+
+
+                if (ref_raw_previous > (vol_var_raw / 2)) //need improve
                 {
-                     Drv_PwrCtrl_4SWBB_SetReferenceRaw(ref_raw_previous); // raw adc vaule
-                    App_HMI_useRefFromPoti = false;
-                    App_HMI_useRefFromGUI = true;
-                    App_HMI_useFixedRef = false;
-                }
-        }
-        else{ //try to raise ref to recover to normal voltage
-              if (ref_raw_previous < vol_var_raw ) //need improve
-                {
-                    ref_raw_previous++;
                     Drv_PwrCtrl_4SWBB_SetReferenceRaw(ref_raw_previous); // raw adc vaule
                     App_HMI_useRefFromPoti = false;
                     App_HMI_useRefFromGUI = true;
                     App_HMI_useFixedRef = false;
+                    if (pwr_ctrl_flagbits.run) {
+                        //Drv_PwrCtrl_4SWBB_SwitchOnPWM();
+
+                    }
+
+
                 }
-            
-            
+            }
+        } else { //try to raise ref to recover to normal voltage
+            if (ref_raw_previous < vol_var_raw) //need improve
+            {
+                if (ref_raw_previous < (vol_var_raw * 0.8))
+                    ref_raw_previous = ref_raw_previous + 2;
+                else ref_raw_previous++;
+                Drv_PwrCtrl_4SWBB_SetReferenceRaw(ref_raw_previous); // raw adc vaule
+                App_HMI_useRefFromPoti = false;
+                App_HMI_useRefFromGUI = true;
+                App_HMI_useFixedRef = false;
+            }
+
+
         }
-        
+
     }
-    
+    Vout_ref_raw_shadow = pwr_ctrl_ref_data.drv_val_VoutRef;
+    Drv_PwrCtrl_4SWBB_Fault_Check();
+
+}
+
+void Task_CC_control(float Vout_set) {
+    //check for OC, control output voltage for CC mode
+    uint16_t vol_var_raw = 0;
+    uint16_t ref_raw_previous = pwr_ctrl_ref_data.drv_val_VoutRef;
+
+
+
+    if (CC_control_mode_EN) {
+
+        Vout_set = (4096 * Vout_set / 8.0 / 3.3);
+        //Voltage_float = (4096 * 13.5 / 8.0 / 3.3); //works
+        vol_var_raw = (uint16_t) Vout_set;
+
+        I_output = 3.3 * (float) pwr_ctrl_adc_data.drv_adc_val_FB_Iout / 4096;
+        I_output = 5.0 * (I_output - 1.65) / 2.0;
+
+        if (I_output>Constant_Current_set) {
+            CC_active_cnt++;
+            //printf(" vol_var_raw=%d\r\n", vol_var_raw);
+            //try to lower output voltage
+            if (vol_var_raw > 3200) //>20V limit
+                vol_var_raw = 3100;
+            if (ref_raw_previous > (vol_var_raw * 0.8))
+                ref_raw_previous = ref_raw_previous - 2;
+            else ref_raw_previous--;
+
+
+            if (ref_raw_previous > (vol_var_raw / 2)) //need improve
+            {
+                Drv_PwrCtrl_4SWBB_SetReferenceRaw(ref_raw_previous); // raw adc vaule
+                App_HMI_useRefFromPoti = false;
+                App_HMI_useRefFromGUI = true;
+                App_HMI_useFixedRef = false;
+                if (pwr_ctrl_flagbits.run) {
+                    //Drv_PwrCtrl_4SWBB_SwitchOnPWM();
+
+                }
+
+
+            }
+
+        } else { //try to raise ref to recover to normal voltage
+            if (ref_raw_previous < vol_var_raw) //need improve
+            {
+                if (ref_raw_previous < (vol_var_raw * 0.8))
+                    ref_raw_previous = ref_raw_previous + 2;
+                else ref_raw_previous++;
+                Drv_PwrCtrl_4SWBB_SetReferenceRaw(ref_raw_previous); // raw adc vaule
+                App_HMI_useRefFromPoti = false;
+                App_HMI_useRefFromGUI = true;
+                App_HMI_useFixedRef = false;
+            }
+
+
+        }
+
+    }
+    Vout_ref_raw_shadow = pwr_ctrl_ref_data.drv_val_VoutRef;
+    Drv_PwrCtrl_4SWBB_Fault_Check();
+
 }

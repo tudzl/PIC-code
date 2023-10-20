@@ -2,21 +2,18 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group name="Group dsPIC33ck"/>
-        <group>
-            <file>file:/Users/lingzhou/MPLABXProjects/4swbbevb-power-average-current-mode-control-1.3.0/dspic33c-4swbb-acmc.X/main.c</file>
-            <file>file:/Users/lingzhou/MPLABXProjects/4swbbevb-power-average-current-mode-control-1.3.0/dspic33c-4swbb-acmc.X/mcc_generated_files/pwm.h</file>
-            <file>file:/Users/lingzhou/MPLABXProjects/4swbbevb-power-average-current-mode-control-1.3.0/dspic33c-4swbb-acmc.X/sources/driver/drv_adc.h</file>
-            <file>file:/Users/lingzhou/MPLABXProjects/4swbbevb-power-average-current-mode-control-1.3.0/dspic33c-4swbb-acmc.X/sources/driver/power_controller/drv_pwrctrl_4SWBB_internal.h</file>
-            <file>file:/Users/lingzhou/MPLABXProjects/4swbbevb-power-average-current-mode-control-1.3.0/dspic33c-4swbb-acmc.X/sources/device/dev_gui_comm.c</file>
-            <file>file:/Users/lingzhou/MPLABXProjects/4swbbevb-power-average-current-mode-control-1.3.0/dspic33c-4swbb-acmc.X/sources/driver/power_controller/drv_pwrctrl_4SWBB.c</file>
-            <file>file:/Users/lingzhou/MPLABXProjects/4swbbevb-power-average-current-mode-control-1.3.0/dspic33c-4swbb-acmc.X/sources/app/app_GUI.c</file>
-            <file>file:/Users/lingzhou/MPLABXProjects/4swbbevb-power-average-current-mode-control-1.3.0/dspic33c-4swbb-acmc.X/sources/driver/power_controller/drv_pwrctrl_4SWBB_misc.c</file>
-            <file>file:/Users/lingzhou/MPLABXProjects/4swbbevb-power-average-current-mode-control-1.3.0/dspic33c-4swbb-acmc.X/sources/driver/power_controller/Controller_pwrctrl_4SWBB.h</file>
-            <file>file:/Users/lingzhou/MPLABXProjects/4swbbevb-power-average-current-mode-control-1.3.0/dspic33c-4swbb-acmc.X/main_tasks.c</file>
-            <file>file:/Users/lingzhou/MPLABXProjects/4swbbevb-power-average-current-mode-control-1.3.0/dspic33c-4swbb-acmc.X/sources/driver/power_controller/smps_control.h</file>
-            <file>file:/Users/lingzhou/MPLABXProjects/4swbbevb-power-average-current-mode-control-1.3.0/dspic33c-4swbb-acmc.X/sources/app/app_HMI.c</file>
-            <file>file:/Users/lingzhou/MPLABXProjects/4swbbevb-power-average-current-mode-control-1.3.0/dspic33c-4swbb-acmc.X/sources/driver/power_controller/drv_pwrctrl_4SWBB.h</file>
+        <group name="Group dsPIC33ck">
+            <file>file:/D:/Dev%20Document/Demo%20board/power/4swbb%20dsPIC/dspic33c-4swbb-acmc.X/main_tasks.c</file>
+            <file>file:/D:/Dev%20Document/Demo%20board/power/4swbb%20dsPIC/dspic33c-4swbb-acmc.X/sources/driver/drv_adc.c</file>
+            <file>file:/D:/Dev%20Document/Demo%20board/power/4swbb%20dsPIC/dspic33c-4swbb-acmc.X/sources/driver/power_controller/drv_pwrctrl_4SWBB.c</file>
+            <file>file:/D:/Dev%20Document/Demo%20board/power/4swbb%20dsPIC/dspic33c-4swbb-acmc.X/main.c</file>
+            <file>file:/D:/Dev%20Document/Demo%20board/power/4swbb%20dsPIC/dspic33c-4swbb-acmc.X/sources/os/os_scheduler_100us.c</file>
+            <file>file:/D:/Dev%20Document/Demo%20board/power/4swbb%20dsPIC/dspic33c-4swbb-acmc.X/mcc_generated_files/adc1.c</file>
+            <file>file:/D:/Dev%20Document/Demo%20board/power/4swbb%20dsPIC/dspic33c-4swbb-acmc.X/sources/driver/power_controller/drv_pwrctrl_4SWBB_misc.c</file>
+            <file>file:/D:/Dev%20Document/Demo%20board/power/4swbb%20dsPIC/dspic33c-4swbb-acmc.X/mcc_generated_files/adc1.h</file>
+            <file>file:/D:/Dev%20Document/Demo%20board/power/4swbb%20dsPIC/dspic33c-4swbb-acmc.X/sources/device/dev_gui_comm.c</file>
+            <file>file:/D:/Dev%20Document/Demo%20board/power/4swbb%20dsPIC/dspic33c-4swbb-acmc.X/sources/misc/fault_common.h</file>
+            <file>file:/D:/Dev%20Document/Demo%20board/power/4swbb%20dsPIC/dspic33c-4swbb-acmc.X/sources/driver/power_controller/drv_pwrctrl_4SWBB_fault.c</file>
         </group>
     </open-files>
 </project-private>
