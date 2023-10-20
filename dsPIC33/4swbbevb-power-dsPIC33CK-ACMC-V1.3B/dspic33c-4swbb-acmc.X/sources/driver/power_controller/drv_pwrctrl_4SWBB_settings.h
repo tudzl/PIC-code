@@ -100,18 +100,19 @@
 #define VAUX_OOR_HYS_CNT        10000
 
 //Iout Over Current ADC
-//#define IOUT_OC_FLOAT           (float)((((0.4*2.2)+1.65)*4096)/3.3) //2.2A
-#define IOUT_OC_FLOAT           (float)((((0.4*3)+1.65)*4096)/3.3) //3A
+//#define IOUT_OC_FLOAT           (float)((((0.4*2.2)+1.65)*4096)/3.3) //2.2A or 3A
+#define IOUT_OC_FLOAT           (float)((((0.4*3)+1.65)*4096)/3.3) //3A  max 4.125A
 #define IOUT_OC_THRESHOLD       (uint16_t) IOUT_OC_FLOAT    
 
-#define IOUT_OC_HYS_FLOAT       (float)((((0.4*2)+1.65)*4096)/3.3) //2A
+#define IOUT_OC_HYS_FLOAT       (float)((((0.4*2.5)+1.65)*4096)/3.3) //2.5A
+//#define IOUT_OC_HYS_FLOAT       (float)((((0.4*2)+1.65)*4096)/3.3) //2A
 #define IOUT_OC_HYS_LIMIT       (uint16_t) IOUT_OC_HYS_FLOAT 
 
 #define IOUT_OC_THRESHOLD_CNT  30
 #define IOUT_OC_HYS_CNT        10000
 
 //Iin Over Current CMP
-#define IIN_OC_CMP_FLOAT        (float)((((0.47*5)+0.447)*4096)/3.3) //5A    Isense = 447mV+ 470mv/A        IIN_OC_CMP_FLOAT@3506
+#define IIN_OC_CMP_FLOAT        (float)((((0.47*5)+0.447)*4096)/3.3) //5A    Isense = 447mV+ 470mv/A        IIN_OC_CMP_FLOAT@3506, Max 6.07A
 //#define IIN_OC_CMP_FLOAT        (float)((((0.47*6)+0.447)*4096)/3.3) //6A    Isense = 447mV+ 470mv/A
 #define IIN_OC_CMP_THRESHOLD    (uint16_t) IIN_OC_CMP_FLOAT    //1037
 

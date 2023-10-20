@@ -17,8 +17,8 @@
         Product Revision  :  PIC24 / dsPIC33 / PIC32MM MCUs - 1.167.0
         Device            :  dsPIC33CK256MP506
     The generated drivers are tested against the following:
-        Compiler          :  XC16 v1.70
-        MPLAB             :  MPLAB X v5.45
+        Compiler          :  XC16 v1.50
+        MPLAB             :  MPLAB X v5.35
 */
 /*
     (c) 2020 Microchip Technology Inc. and its subsidiaries. You may use this
@@ -52,6 +52,12 @@
 */
 void INTERRUPT_Initialize (void)
 {
+    //    ADFLTR3: ADC Oversample Filter 3
+    //    Priority: 5
+        IPC30bits.ADFLTR3IP = 5;
+    //    ADFLTR0: ADC Oversample Filter 0
+    //    Priority: 6
+       IPC30bits.ADFLTR0IP = 6;
     //    ADCAN0: ADC AN0 Convert Done
     //    Priority: 4
         IPC22bits.ADCAN0IP = 4;

@@ -38,7 +38,11 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <stddef.h>
+#include <stdlib.h>
 #include "dev_gui_comm.h"
+#include "misc/fault_common.h"
+//#include "drv_pwrctrl_4SWBB_settings.h"
+#include "../app/../driver/power_controller/drv_pwrctrl_4SWBB_settings.h"
 
 //-----------------------------------------------------------
 // Configure Datastream function
@@ -114,7 +118,9 @@ bool transfer_highbyte = true;
 uint8_t rcv_data_buffer[GUICOMM_RCV_DATABUFFER_SIZE];
 uint8_t  tmp_var[8];
 uint16_t dataCRC;
-
+extern float Current_lim_set;
+extern float Vout_set ;
+extern FAULT_OBJ_T fltobj_4SWBB_IoutOC; 
 
 //void Dev_Gui_Comm_SendDataByte(uint8_t data);
 //void Dev_Gui_Comm_SendDataWord(uint16_t data);
@@ -544,12 +550,16 @@ void UARTComm_Rcv_Task(void) {
     //static uint16_t rcv_CRC = 0;
     static uint16_t rcv_timeout = 0;
     static uint16_t vol_var_raw = 0;
+    static uint16_t cur_var_raw = 0;
+    static uint16_t cur_var_raw_hys = 0;
     //static uint8_t Voltage_int = 0;
     static double Voltage_double = 0;
     static float Voltage_float = 0;
+    static float Current_float_lim = 0;
     uint8_t data;
     uint8_t *tmp_frac; //issues here
     float Vol_frac = 0;
+    float Cur_frac = 0;
    // memset(tmp_var, 0, sizeof (tmp_var));  //caused empty rec buf issue
    // rcv_data_index = 0;
 
@@ -587,7 +597,7 @@ void UARTComm_Rcv_Task(void) {
 
 
 
-                // data payload process:
+            // data payload process for setting voltage:
             case RCV_SET_SV:
 
                 flag = 5;
@@ -619,10 +629,77 @@ void UARTComm_Rcv_Task(void) {
 
                 //}
                 break;
+                
+            // data payload process for setting current limit:
+            case RCV_SET_SA:
 
+                flag = 5;
 
+                if (rcv_data_index < 6) {
+                    flag = 6;
 
-            case CMD_SV_EOF:
+                    tmp_var[rcv_data_index] = data;
+
+                    rcv_data_index++;
+                }
+                if (rcv_data_index >= 6) //are we  receiving error data???
+                {
+                    //rcv_state = RCV_WAIT_FOR_STARTBYTE;
+                    //memset(tmp_var, 0, sizeof (tmp_var));
+                    //rcv_data_index = 0;
+                    flag = 8;
+                    if (data == UARTCOMM_PROTOCOL_SetCur_lim_EOF)//need ending char for uart cmds
+                        rcv_state = CMD_SA_EOF;
+                }
+
+                break;
+
+            //process SA CMD to internal paras
+            case CMD_SA_EOF:
+                //seems working!
+                //tmp_var[0]='9';
+                // tmp_var[1]='.';
+                // tmp_var[2]='5';
+                printf("char:%s", tmp_var);
+                printf("  idx:%d \r\n", rcv_data_index);
+                //Voltage_float = atof(tmp_var); //not working
+                Current_float_lim = atoi(tmp_var); //working
+                tmp_frac = &tmp_var[3];
+               // printf(" atoi_2=%d\r\n",  atoi ( tmp_frac)); //working
+                Cur_frac =  atoi ( tmp_frac);
+                Current_float_lim = Current_float_lim+ Cur_frac/1000.0;
+                Current_lim_set = Current_float_lim;
+                //vol_var_raw = atoi ( tmp_var);
+                 printf("CL=%2.3f A\r\n", Current_float_lim); //??
+                 //#define IOUT_OC_FLOAT           (float)((((0.4*2.2)+1.65)*4096)/3.3) //2.2A or 3A
+                  //#define IOUT_OC_FLOAT           (float)((((0.4*3)+1.65)*4096)/3.3) //3A
+                 Current_float_lim = (float)((((0.4*Current_float_lim)+1.65)*4096)/3.3); //20 mili Ohm gain 20 
+
+                cur_var_raw = (uint16_t) Current_float_lim;
+                printf(" cur_var_raw=%d\r\n", cur_var_raw);
+
+                if (cur_var_raw > 4095) //>20V limit
+                    cur_var_raw = 4095;
+                if (cur_var_raw > 2097) //check if valid input data, >100mA
+                {
+                    cur_var_raw_hys = cur_var_raw -250;// 0.5A smaller
+                    //Drv_PwrCtrl_4SWBB_SetReferenceRaw(vol_var_raw); // raw adc vaule
+                    // set fltobj_4SWBB_IoutOC
+                    FAULT_Init(&fltobj_4SWBB_IoutOC, cur_var_raw, cur_var_raw_hys, IOUT_OC_THRESHOLD_CNT, IOUT_OC_HYS_CNT );
+                    //    FAULT_Init(&fltobj_4SWBB_IoutOC, IOUT_OC_THRESHOLD, IOUT_OC_HYS_LIMIT, IOUT_OC_THRESHOLD_CNT, IOUT_OC_HYS_CNT );
+                    App_HMI_useRefFromPoti = false;
+                    App_HMI_useRefFromGUI = true;
+                    App_HMI_useFixedRef = false;
+                }
+                
+                memset(tmp_var, 0, sizeof (tmp_var));  
+                rcv_protocol_id = 0;
+                rcv_data_index = 0;
+                rcv_state = RCV_WAIT_FOR_STARTBYTE;
+                //flag = 9;
+                break;
+                
+                case CMD_SV_EOF:
                 //seems working!
                 //tmp_var[0]='9';
                 // tmp_var[1]='.';
@@ -635,8 +712,9 @@ void UARTComm_Rcv_Task(void) {
                // printf(" atoi_2=%d\r\n",  atoi ( tmp_frac)); //working
                 Vol_frac =  atoi ( tmp_frac);
                 Voltage_float = Voltage_float+ Vol_frac/1000.0;
+                Vout_set = Voltage_float;
                 //vol_var_raw = atoi ( tmp_var);
-                 printf("VF=%2.3f\r\n", Voltage_float); //??
+                 printf("VF=%2.3f V\r\n", Voltage_float); //??
                 // printf(" atoi=%d\r\n", vol_var_raw); //working
                 // Voltage_float = atof('9.8'); // not working
                 // Voltage_float = atoi('8'); // not working

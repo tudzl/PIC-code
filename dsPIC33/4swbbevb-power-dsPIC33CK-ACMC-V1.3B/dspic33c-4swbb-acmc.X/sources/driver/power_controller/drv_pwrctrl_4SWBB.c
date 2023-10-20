@@ -78,14 +78,14 @@ void Drv_PwrCtrl_4SWBB_Init(void)
 {
   uint32_t l_zw_;
 
-  l_zw_ = __builtin_muluu(uQ15val(0.9), PG1PER);
-  DCmaxClampBuck = (uint16_t) (l_zw_ >> 16); // eqo 0.9*PG1PER?
+  l_zw_ = __builtin_muluu(uQ15val(0.95), PG1PER); //def 0.9
+  DCmaxClampBuck = (uint16_t) (l_zw_ >> 16);
   l_zw_ = __builtin_muluu(uQ15val(0.07), PG1PER);
   DCminClampBuck = (uint16_t) (l_zw_ >> 16) + PG1DTH;
 
   l_zw_ = __builtin_muluu(uQ15val(0.9), PG1PER);
   DCmaxClampBoost = (uint16_t) (l_zw_ >> 16);
-  l_zw_ = __builtin_muluu(uQ15val(0.07), PG1PER);
+  l_zw_ = __builtin_muluu(uQ15val(0.05), PG1PER); //def 0.07
   DCminClampBoost = (uint16_t) (l_zw_ >> 16) + PG2DTH;
 
   pwr_ctrl_flagbits.CollectivePwrCtrlFlagbits = 0;
@@ -218,14 +218,14 @@ void Drv_PwrCtrl_4SWBB_Task_100us(void)
         // (open or closed loop) after running in open loop at startup
         pwr_ctrl_flagbits.inopenloop_saving = pwr_ctrl_flagbits.inopenloop;
         Drv_PwrCtrl_4SWBB_SetMode_OpenLoop();
-        //Drv_PwrCtrl_4SWBB_SetMode_ClosedLoop();
+
         pwr_ctrl_state = PCS_SOFT_START_OL;
         taskCounterPreBias = 0;
       }
       break;
 
       //------------------------------------------------------------------------
-    case PCS_SOFT_START_OL: //4      overload before?
+    case PCS_SOFT_START_OL: //4      
       if (FourSWBBFaults.CollectiveFaults != 0)
       {
         Drv_PwrCtrl_4SWBB_SwitchOffPWM();
@@ -281,7 +281,7 @@ void Drv_PwrCtrl_4SWBB_Task_100us(void)
       break;
 
       //------------------------------------------------------------------------
-    case PCS_UP_AND_RUNNING: //6 .  Soft-Start is complete, power is up and running
+    case PCS_UP_AND_RUNNING: //6
       if (FourSWBBFaults.CollectiveFaults != 0)
       {
         Drv_PwrCtrl_4SWBB_SwitchOffPWM();
@@ -328,7 +328,7 @@ void Drv_PwrCtrl_4SWBB_CtrlLoop(void)
   static uint16_t loopCounterV = 0;
 
   //Debug DACout------------------------------------
-  CMP2_SetDACDataHighValue(pwr_ctrl_ref_data.val_VoutRef_internal); //output DAC values to external DAC_OUT TP pin, 1:8 ratio
+  CMP2_SetDACDataHighValue(pwr_ctrl_ref_data.val_VoutRef_internal);
   //Debug DACout------------------------------------
 
   //DCM DCM -------------------------------------------------------------------------------------------------------
@@ -486,8 +486,8 @@ inline void Drv_PwrCtrl_4SWBB_DriveBuckBoost(uint16_t drive_val)
   }
 
   PG1TRIGA = Controller_4SWBB._DCBuckset >> 1;
-  PWM_DutyCycleSet(BUCK_LEG_PWM, Controller_4SWBB._DCBuckset);
-  PWM_DutyCycleSet(BOOST_LEG_PWM, Controller_4SWBB._DCBoostset);
+  PWM_DutyCycleSet(1, Controller_4SWBB._DCBuckset);
+  PWM_DutyCycleSet(2, Controller_4SWBB._DCBoostset);
 }
 
 //==============================================================================

@@ -66,8 +66,8 @@
 //======================================================================================================================
 
 typedef struct {
-    volatile uint16_t val_VoutRef_internal; //runtime value get from ADC
-    volatile uint16_t drv_val_VoutRef;    //target voltage var? 
+    volatile uint16_t val_VoutRef_internal;
+    volatile uint16_t drv_val_VoutRef;
     volatile uint16_t val_IinRef_internal;
     volatile uint16_t drv_val_IinRef;
 } PWR_CTRL_REFDATA_t; // power control soft-start settings and variables

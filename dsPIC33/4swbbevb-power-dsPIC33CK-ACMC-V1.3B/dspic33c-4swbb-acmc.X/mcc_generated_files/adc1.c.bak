@@ -75,8 +75,10 @@ void ADC1_Initialize(void)
   ADCON1H = 0x60;
   // PTGEN disabled; SHRADCS 2; REFCIE disabled; SHREISEL Early interrupt is generated 1 TADCORE clock prior to data being ready; REFERCIE disabled; EIEN disabled; 
   ADCON2L = 0x00;
-    // SHRSAMC 1; 
-  ADCON2H = 0x01; //changed by zell
+    // SHRSAMC 2; 
+  ADCON2H = 0x02;
+    // SHRSAMC 0; 
+  //ADCON2H = 0x00; //def
   // SWCTRG disabled; SHRSAMP disabled; SUSPEND disabled; SWLCTRG disabled; SUSPCIE disabled; CNVCHSEL AN15; REFSEL disabled; 
   ADCON3L = 0x0F;
   // SHREN enabled; C1EN enabled; C0EN enabled; CLKDIV 1; CLKSEL FOSC/2; 
@@ -129,29 +131,19 @@ void ADC1_Initialize(void)
   ADCMP2HI = 0x00;
   // CMPHI 0; 
   ADCMP3HI = 0x00;
-  
-  
-      // OVRSAM 4x; MODE Averaging Mode; FLCHSEL AN17; IE enabled; FLEN enabled; 
+    // OVRSAM 4x; MODE Averaging Mode; FLCHSEL AN17; IE enabled; FLEN enabled; 
   ADFL0CON = 0xE611;
-  ADFL0CONbits.IE=0;
-
     // OVRSAM 4x; MODE Averaging Mode; FLCHSEL AN1; IE enabled; FLEN enabled; 
   ADFL1CON = 0xE601;
-    // OVRSAM 4x; MODE Averaging Mode; FLCHSEL AN0; IE disabled; FLEN enabled; 
-  ADFL2CON = 0xE400;
+    // OVRSAM 8x; MODE Averaging Mode; FLCHSEL AN0; IE enabled; FLEN enabled; 
+  ADFL2CON = 0xEA00;
+  // OVRSAM 4x; MODE Oversampling Mode; FLCHSEL AN0; IE disabled; FLEN disabled; 
+  //ADFL1CON = 0x400;
+
     // OVRSAM 4x; MODE Oversampling Mode; FLCHSEL AN0; IE disabled; FLEN disabled; 
-  ADFL3CON = 0x400;
-  
-  /*
-  // OVRSAM 4x; MODE Oversampling Mode; FLCHSEL AN0; IE disabled; FLEN disabled; 
-  ADFL0CON = 0x400;
-  // OVRSAM 4x; MODE Oversampling Mode; FLCHSEL AN0; IE disabled; FLEN disabled; 
-  ADFL1CON = 0x400;
-  // OVRSAM 4x; MODE Oversampling Mode; FLCHSEL AN0; IE disabled; FLEN disabled; 
-  ADFL2CON = 0x400;
+  //ADFL2CON = 0x400;
   // OVRSAM 4x; MODE Oversampling Mode; FLCHSEL AN0; IE disabled; FLEN disabled; 
   ADFL3CON = 0x400;
- */
   // HIHI disabled; LOLO disabled; HILO disabled; BTWN disabled; LOHI disabled; CMPEN disabled; IE disabled; 
   ADCMP0CON = 0x00;
   // HIHI disabled; LOLO disabled; HILO disabled; BTWN disabled; LOHI disabled; CMPEN disabled; IE disabled; 
@@ -193,6 +185,10 @@ void ADC1_Initialize(void)
   IFS5bits.ADCAN0IF = 0;
   // Enabling FB_Iin_AN0 interrupt.
   IEC5bits.ADCAN0IE = 1;
+  
+  ADFL0CONbits.IE=0;
+  ADFL1CONbits.IE=0;
+  ADFL2CONbits.IE=0;
 
   // Setting WARMTIME bit
   ADCON5Hbits.WARMTIME = 0xF;

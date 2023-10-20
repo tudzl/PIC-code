@@ -67,7 +67,7 @@ bool App_HMI_useFixedRef = true;
 //======================================================================================================================
 extern uint16_t Vout_tmp_raw ;
 uint8_t Vout_Btn_Swh_cnt = 0;
-extern uint8_t streamData_enable;
+
 
 void App_HMI_Init(void)
 {
@@ -107,8 +107,8 @@ void CheckButtons(void)
             Drv_PwrCtrl_4SWBB_SetMode_OpenLoop();
         }
     }
-    else if ( (buttonresponse == DEV_BUTTON_EVENT_PRESSED_VeryLONG)&& (0==streamData_enable) )
-    {   //will not change voltage if in UART CMD mode! V1.3B
+    else if (buttonresponse == DEV_BUTTON_EVENT_PRESSED_VeryLONG)
+    {   
         Vout_Btn_Swh_cnt++;
         if (1==Vout_Btn_Swh_cnt)    
              Vout_tmp_raw =VREF_FIXED12V_FLOAT;

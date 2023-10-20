@@ -57,6 +57,11 @@
 #include "driver/drv_led.h"
 /*
                          Main application
+ * Version 1.5 Added ADC 4x filtering and CC mode, need test
+ * Version 1.4B try to add set current limit function, works!
+ * Version 1.4 added Iin calc based on 3.3K 470R 47R real values, seems more accurate then original 447mV + 470mv !!! need  nF cap for TP132
+ * issue Iin seems smaller than real value? e.g. Iin larger than 0.5A, while 447mV + 470mv/A
+ * Version 1.3B fixed XC16 2.1 compiling issue, change max min buck boost DC to 0.95-0.05
  * Version 1.3 added UART CMD  mode  to set output voltage, test OK, but atof not working "SV15.123V."
  * Version 1.2 added short press btn > 10 to disable data stream output to  make printf usable, test OK
  * Version 1.1 added very long press Btn to change diff Vout, test OK
@@ -72,25 +77,35 @@
  *  CMP1: RC1 <--I in
  *  CMP2: RC2 <--V in  def DAC_OUT
  *  CMP3: RB7 <--Vout
+ *    pwr_ctrl_adc_data.drv_adc_val_FB_Iin =  ADCBUF0;  //ADC0
+ *    pwr_ctrl_adc_data.drv_adc_val_FB_Vout = ADCBUF1;  //AADC1
+ * CMD:SV14.111V.  SV12.000V. SA04.111A.  SA01.100A.   SA02.001A.
  */
 //copyed from drv_pwrctrl_4SWBB_settings.h"
 #define VREF_FIXED14P6V_FLOAT (float)((4096/8/3.3)*14.6)   //12V, Res Voltage divider 1:8
 #define VREF_FIXED14P6V       (uint16_t) VREF_FIXED14P6V_FLOAT
+uint8_t UART_CMD_MD =1;  //1@UART CMD mode instead of factory default GUI Comm mode
+uint8_t Closed_loop_def_EN =1;  // switch to closed loop after ramp up as default
+uint8_t CC_control_mode_EN =1; 
 uint16_t Vout_tmp_raw = 0;
 double V_output = 0;
 double I_output = 0;
 float P_output = 0;
 double V_input = 0;
 double I_input = 0;
+double I_input_filtered = 0;
+float Current_lim_set =0;
+float Vout_set =0;
 float P_input = 0;
 uint8_t flag=0;
+extern uint8_t streamData_enable ;
 
 int main(void)
 {
     // initialize the device
     SYSTEM_Initialize();
     printf("< dsPIC33CKMP506 PIM+4SWBB ACMC demo>\r\n");
-    printf("Version 1.3B,  Data: 8.Oct.2023 by Zell \r\n");
+    printf("Version 1.5,  Data: 19.Oct.2023 by Zell \r\n");
     printf("In UART CMD mode, user can send <SV15.123V.> to set the output Voltage!\r\n");
     printf("Hinweis: always send 6 digits for the number value!!!\r\n");
 
@@ -106,17 +121,17 @@ int main(void)
     //Drv_PwrCtrl_4SWBB_SetReferenceRaw(VREF_FIXED14P6V); //14.6V
     //    pwr_ctrl_flagbits.inopenloop = 1;
     //pwr_ctrl_flagbits.inclosedloop = 0;
-//    
-//            if (pwr_ctrl_flagbits.inopenloop)
-//        {  
-//            Drv_PwrCtrl_4SWBB_SetMode_ClosedLoop();
-//        }  
-//        else
-//        {  
-//            Drv_PwrCtrl_4SWBB_SetMode_OpenLoop();
-//        }
-    //  PWM_DutyCycleSet(BuckPWM, 0);
-   //  PWM_DutyCycleSet(BoostPWM, 0);
+    if(UART_CMD_MD)
+
+    {
+        streamData_enable = 0;
+        printf("Run with  UART CMD mode now, GUI Stream disabled!");
+    }
+    else 
+        streamData_enable = 1;
+    
+    
+    
     OS_Scheduler_RunForever();
     // void Drv_PwrCtrl_4SWBB_CtrlLoop(void) 
     //this function contains the AVG Current Controller (every 2nd PWM cycle) 

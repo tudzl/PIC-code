@@ -64,9 +64,14 @@ void __attribute__((__interrupt__, auto_psv)) _ADCAN0Interrupt(void)
 {
   
 //  TP35_TX_SetHigh();
-  
+  if(ADFL1CONbits.RDY){ //4x avg filtering
+        pwr_ctrl_adc_data.drv_adc_val_FB_Vout = ADFL1DAT; //test only, AN1
+         //ADFL1DAT;
+   }
+  else pwr_ctrl_adc_data.drv_adc_val_FB_Vout = ADCBUF1; //not reading will cause issues!
+ 
   pwr_ctrl_adc_data.drv_adc_val_FB_Iin =  ADCBUF0;
-  pwr_ctrl_adc_data.drv_adc_val_FB_Vout = ADCBUF1;
+ // pwr_ctrl_adc_data.drv_adc_val_FB_Vout = ADCBUF1;
 
   Drv_PwrCtrl_4SWBB_CtrlLoop(); 
 
@@ -80,11 +85,17 @@ void __attribute__((__interrupt__, auto_psv)) _ADCAN0Interrupt(void)
       }
       break;
 
-    case ADC_CHANNEL_AN17_IOUT: //Read the ADC value from the ADCBUF19
+    case ADC_CHANNEL_AN17_IOUT: //Read the ADC value from the ADCBUF17
       if (ADSTATHbits.AN17RDY)
       {
-        pwr_ctrl_adc_data.drv_adc_val_FB_Iout = ADCBUF17;
-        ADCON3Lbits.CNVCHSEL = ADC_CHANNEL_AN10_VDD;
+       // pwr_ctrl_adc_data.drv_adc_val_FB_Iout = ADCBUF17;
+        if (ADFL0CONbits.RDY) { 
+             pwr_ctrl_adc_data.drv_adc_val_FB_Iout = ADFL0DAT; //test only for better accuracy
+              ADCON3Lbits.CNVCHSEL = ADC_CHANNEL_AN10_VDD;
+         }
+        
+         //ADCON3Lbits.CNVCHSEL = ADC_CHANNEL_AN10_VDD;
+       
       }
       break;
 
@@ -116,4 +127,3 @@ void __attribute__((__interrupt__, auto_psv)) _ADCAN0Interrupt(void)
 
 //======================================================================================================================
 //======================================================================================================================
-
