@@ -124,7 +124,7 @@ extern float Current_lim_set;
 extern float Constant_Current_set ;
 extern float Vout_set;
 extern FAULT_OBJ_T fltobj_4SWBB_IoutOC;
-
+extern uint8_t CC_control_mode_EN;
 //void Dev_Gui_Comm_SendDataByte(uint8_t data);
 //void Dev_Gui_Comm_SendDataWord(uint16_t data);
 
@@ -531,14 +531,22 @@ void GuiComm_Rcv_Task(void) {
 #define RCV_SET_SV		2
 #define RCV_SET_SA		3
 #define RCV_SET_SC      4
+//#define RCV_SET_SC_EN   44 
 #define RCV_SET_EQO		5
 #define CMD_SV_EOF		8
 #define CMD_SA_EOF		9
 #define CMD_SC_EOF	    10
+#define CMD_CC_EN_EOF	11
+#define CMD_CL_EN_EOF	12
+#define CMD_Output_EN_EOF	20
+#define CMD_Output_OFF_EOF	21
 
 //#define UARTCOMM_PROTOCOL_ID    'S'
 #define UARTCOMM_PROTOCOL_SetVoltage_EOF    'V'
 #define UARTCOMM_PROTOCOL_SetCur_lim_EOF    'A'
+#define UARTCOMM_PROTOCOL_SetCC_EN_EOF      'C'
+#define UARTCOMM_PROTOCOL_SetCL_EN_EOF      'L'
+
 //by zell
 // function to parse uart SV=12V SA=1.5A functions
 extern uint8_t flag;
@@ -627,16 +635,7 @@ void UARTComm_Rcv_Task(void) {
                     if (data == UARTCOMM_PROTOCOL_SetVoltage_EOF)//need ending char for uart cmds
                         rcv_state = CMD_SV_EOF;
                 }
-                //                if (data == UARTCOMM_PROTOCOL_SetVoltage_EOF) //are we finished receiving data???
-                //                {
-                //                    //tmp_var[rcv_data_index - 1] = 0;
-                //                    rcv_state = CMD_SV_EOF;
-                //                    printf("idx:%d \r\n", rcv_data_index);
-                //                    //rcv_data_index = 0;
-                //                   //  flag = 7; //stuck here???? issue solved: need ending char for uart cmds
-                //                }
 
-                //}
                 break;
 
                 // data payload process for setting current limit:
@@ -666,24 +665,46 @@ void UARTComm_Rcv_Task(void) {
             case RCV_SET_SC:
 
                 flag = 5;
-
+                if (UARTCOMM_PROTOCOL_SetCC_EN_EOF==data){
+                    rcv_state = CMD_CC_EN_EOF;
+                }
+                if (UARTCOMM_PROTOCOL_SetCL_EN_EOF==data){
+                    rcv_state = CMD_CL_EN_EOF;
+                }
                 if (rcv_data_index < 6) {
                     flag = 6;
-
                     tmp_var[rcv_data_index] = data;
-
                     rcv_data_index++;
                 }
                 if (rcv_data_index >= 6) //are we  receiving error data???
                 {
-                    //rcv_state = RCV_WAIT_FOR_STARTBYTE;
-                    //memset(tmp_var, 0, sizeof (tmp_var));
-                    //rcv_data_index = 0;
                     flag = 8;
                     if (data == UARTCOMM_PROTOCOL_SetCur_lim_EOF)//need ending char for uart cmds
                         rcv_state = CMD_SC_EOF;
                 }
 
+                break;
+                
+             case CMD_CC_EN_EOF: 
+                printf("CMD char:%s \r\n", tmp_var);
+                printf("#>:Constant Current mode enabled! \r\n", tmp_var);
+                CC_control_mode_EN =1; 
+                memset(tmp_var, 0, sizeof (tmp_var));
+                rcv_protocol_id = 0;
+                rcv_data_index = 0;
+                rcv_state = RCV_WAIT_FOR_STARTBYTE;
+                //flag = 9;
+                break;
+                
+            case CMD_CL_EN_EOF: 
+                printf("CMD char:%s \r\n", tmp_var);
+                printf("#>:Constant Current mode disabled! Only Current Limit is active!\r\n", tmp_var);
+                CC_control_mode_EN =0; 
+                memset(tmp_var, 0, sizeof (tmp_var));
+                rcv_protocol_id = 0;
+                rcv_data_index = 0;
+                rcv_state = RCV_WAIT_FOR_STARTBYTE;
+                //flag = 9;
                 break;
 
                 //process SA CMD to internal paras
@@ -775,20 +796,13 @@ void UARTComm_Rcv_Task(void) {
                 //flag = 9;
                 break;
             case CMD_SC_EOF:
-                //seems working!
-                //tmp_var[0]='9';
-                // tmp_var[1]='.';
-                // tmp_var[2]='5';
                 printf("char:%s ", tmp_var);
-                //printf("  idx:%d \r\n", rcv_data_index);
-                //Voltage_float = atof(tmp_var); //not working
                 Current_float_lim = atoi(tmp_var); //working
                 tmp_frac = &tmp_var[3];
                 // printf(" atoi_2=%d\r\n",  atoi ( tmp_frac)); //working
                 Cur_frac = atoi(tmp_frac);
                 Current_float_lim = Current_float_lim + Cur_frac / 1000.0;
                 Constant_Current_set = Current_float_lim;
-                //vol_var_raw = atoi ( tmp_var);
                 printf("CC=%2.3f A\r\n", Constant_Current_set); //??
                 //#define IOUT_OC_FLOAT           (float)((((0.4*2.2)+1.65)*4096)/3.3) //2.2A or 3A
                 //#define IOUT_OC_FLOAT           (float)((((0.4*3)+1.65)*4096)/3.3) //3A
@@ -816,6 +830,7 @@ void UARTComm_Rcv_Task(void) {
                 rcv_protocol_id = 0;
                 rcv_data_index = 0;
                 rcv_state = RCV_WAIT_FOR_STARTBYTE;
+                CC_control_mode_EN =1;
                 //flag = 9;
                 break;
         }

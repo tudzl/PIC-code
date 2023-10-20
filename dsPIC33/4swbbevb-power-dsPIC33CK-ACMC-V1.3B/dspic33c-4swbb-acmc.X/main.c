@@ -58,6 +58,7 @@
 #include "driver/drv_led.h"
 /*
                          Main application
+ * Version 1.6 fixed minor bugs, improved CMD interface logic, added set CC CL CMD mode,CC loop running  in 10ms loops very fast to convergence
  * Version 1.5B Added true CC mode in addtion to original OC protection function need test and improve, 100ms loops
  * Version 1.5 Added ADC 4x filtering for Vout and Iout, Iin and CC mode, need test and improve
  * Version 1.4B try to add set current limit function, works!
@@ -81,7 +82,8 @@
  *  CMP3: RB7 <--Vout
  *    pwr_ctrl_adc_data.drv_adc_val_FB_Iin =  ADCBUF0;  //ADC0
  *    pwr_ctrl_adc_data.drv_adc_val_FB_Vout = ADCBUF1;  //AADC1
- * CMD:SV14.111V.  SV12.000V. SA04.111A.  SA01.100A.   SA02.001A.
+ * CMD:SV14.111V.  SV12.000V. SA04.111A.  SA01.100A.   SA02.001A.  SC01.000A.
+ * CMD:SCC,  SCL
  */
 //copyed from drv_pwrctrl_4SWBB_settings.h"
 //#define VREF_FIXED14P6V_FLOAT (float)((4096/8/3.3)*14.6)   //12V, Res Voltage divider 1:8
@@ -108,11 +110,19 @@ int main(void)
 {
     // initialize the device
     SYSTEM_Initialize();
+
     printf("< dsPIC33CKMP506 PIM+4SWBB ACMC with CC function demo>\r\n");
-    printf("Version 1.5B,  Data: 20.Oct.2023 by Zell \r\n");
-    printf("In UART CMD mode:  user can send <SV15.123V.> to set the output Voltage!\r\n");
-    printf("                   user can send <SA01.100A.> to set the Current Limit value!\r\n");
-    printf("                   user can send <SC00.300A.> to set the Constant Current value!\r\n");
+    printf("Version 1.6,  Data: 20.Oct.2023 by Zell \r\n");
+    Current_lim_set = 3.3 * (float) IOUT_OC_THRESHOLD / 4096.0;
+    Current_lim_set = 5.0 * (Current_lim_set - 1.65) / 2.0;
+    Vout_tmp_raw = VREF_FIXED14P6V;
+    float Vout_def = 8.0*3.3*VREF_FIXED14P6V_FLOAT/4086.0;
+     
+    
+    
+    printf("In UART CMD mode:  user can send <SV15.123V.> to set the output Voltage! DEF.=%2.3f V\r\n",Vout_def);
+    printf("                   user can send <SA01.100A.> to set the Current Limit value! DEF.=%2.3f A.\r\n",Current_lim_set);
+    printf("                   user can send <SC00.300A.> to set the Constant Current value! DEF.=60%% CL\r\n");
     printf("Hinweis: always send 6 digits for the number value!!!\r\n");
 
     Dev_Button_Init();
@@ -123,7 +133,7 @@ int main(void)
     App_HMI_Init();
     Dev_GuiComm_Init(); //Init before App_GUI_Init())
     App_GUI_Init();
-    Vout_tmp_raw = VREF_FIXED14P6V;
+    
     //Drv_PwrCtrl_4SWBB_SetReferenceRaw(VREF_FIXED14P6V); //14.6V
     //    pwr_ctrl_flagbits.inopenloop = 1;
     //pwr_ctrl_flagbits.inclosedloop = 0;
@@ -138,14 +148,15 @@ int main(void)
     
 
     
-   Current_lim_set = 3.3 * (float) IOUT_OC_THRESHOLD / 4096.0;
-   Current_lim_set = 5.0 * (Current_lim_set - 1.65) / 2.0;
+
    
     if(CC_control_mode_EN)
 
     {
         streamData_enable = 0;
         printf("Run with CC mode Set with C_lim: %1.3F \r\n",Current_lim_set);
+        if (0==Constant_Current_set)
+            Constant_Current_set = Current_lim_set * 0.6;
     }
     
     printf("---Main loop starts now---!\r\n");
