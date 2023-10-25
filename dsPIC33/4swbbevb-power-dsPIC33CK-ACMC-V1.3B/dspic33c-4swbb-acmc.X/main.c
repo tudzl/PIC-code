@@ -58,8 +58,7 @@
 #include "driver/drv_led.h"
 /*
                          Main application
- * Found issue semms can not output stable voltage lower than 5V, changed VOUT_PREBIAS @ 2V to test!
- * Version 1.6B added ON OFF CMD control
+ * Version 1.6B fixed minor bugs, added UART CMD ON OFF control
  * Version 1.6 fixed minor bugs, improved CMD interface logic, added set CC CL CMD mode,CC loop running  in 10ms loops very fast to convergence
  * Version 1.5B Added true CC mode in addtion to original OC protection function need test and improve, 100ms loops
  * Version 1.5 Added ADC 4x filtering for Vout and Iout, Iin and CC mode, need test and improve
@@ -85,7 +84,7 @@
  *    pwr_ctrl_adc_data.drv_adc_val_FB_Iin =  ADCBUF0;  //ADC0
  *    pwr_ctrl_adc_data.drv_adc_val_FB_Vout = ADCBUF1;  //AADC1
  * CMD:SV14.111V.  SV12.000V. SA04.111A.  SA01.100A.   SA02.001A.  SC01.000A.
- * CMD:SCC,  SCL
+ * CMD:SCC,  SCL  SON. SOFF.
  */
 //copyed from drv_pwrctrl_4SWBB_settings.h"
 //#define VREF_FIXED14P6V_FLOAT (float)((4096/8/3.3)*14.6)   //12V, Res Voltage divider 1:8
@@ -114,7 +113,7 @@ int main(void)
     SYSTEM_Initialize();
 
     printf("< dsPIC33CKMP506 PIM+4SWBB ACMC with CC function demo>\r\n");
-    printf("Version 1.6B,  Data: 25.Oct.2023 by Zell \r\n");
+    printf("Version 1.6,  Data: 20.Oct.2023 by Zell \r\n");
     Current_lim_set = 3.3 * (float) IOUT_OC_THRESHOLD / 4096.0;
     Current_lim_set = 5.0 * (Current_lim_set - 1.65) / 2.0;
     Vout_tmp_raw = VREF_FIXED14P6V;

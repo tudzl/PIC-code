@@ -45,10 +45,10 @@
 //======================================================================================================================
 
 //Vin Under Voltage ADC
-#define VIN_UV_FLOAT        (float)((4096/26.4)*7)   //7V
+#define VIN_UV_FLOAT        (float)((4096/26.4)*4.9)   //4.9V def 8V
 #define VIN_UV_THRESHOLD     (uint16_t) VIN_UV_FLOAT     
 
-#define VIN_UV_HYS_FLOAT 		(float)((4096/8/3.3)*7.5)  //7.5V
+#define VIN_UV_HYS_FLOAT 		(float)((4096/8/3.3)*5.0)  //5.0V def 8.5V
 #define VIN_UV_HYSLIMIT      (uint16_t) VIN_UV_HYS_FLOAT 
 
 #define VIN_UV_THRESHOLD_CNT  30
@@ -126,8 +126,11 @@
 //@brief Defines for voltage and current settings
 //======================================================================================================================
 
-#define VOUT_PREBIAS_FLOAT    (float)((4096/26.4)*3)            //3V
+#define VOUT_PREBIAS_FLOAT    (float)((4096/26.4)*2)            //2V need test
 #define VOUT_PREBIAS          (uint16_t) VOUT_PREBIAS_FLOAT     //  
+
+#define VOUT_PREBIAS_FLOAT_3V    (float)((4096/26.4)*3)            //3V def 3V
+//#define VOUT_PREBIAS          (uint16_t) VOUT_PREBIAS_FLOAT     //  
 
 #define VOUT_10V_FLOAT      (float)((4096/8/3.3)*10)   //10V
 #define VOUT_10V            (uint16_t)VOUT_10V_FLOAT
