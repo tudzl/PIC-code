@@ -352,7 +352,7 @@ void Drv_PwrCtrl_4SWBB_CtrlLoop(void)
     Controller_4SWBB._VDCref = pwr_ctrl_ref_data.val_VoutRef_internal >> 0; //xxV  
 
     SMPS_Controller2P2ZUpdate(&VMC2p2z, &pwr_ctrl_adc_data.drv_adc_val_FB_Vout, Controller_4SWBB._VDCref, &Controller_4SWBB._IACref);
-
+    
     //Vin<->Iin feedforward, numbers optimized
     pwr_ctrl_ref_data.val_IinRef_internal = (9600 - (pwr_ctrl_adc_data.drv_adc_val_FB_Vdd << 1)) / 3; //power feedforward for current limit
     if ((Controller_4SWBB._IACref > pwr_ctrl_ref_data.val_IinRef_internal)) //&& (pwr_ctrl_state < PCS_SOFT_START))

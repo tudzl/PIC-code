@@ -786,14 +786,19 @@ void UARTComm_Rcv_Task(void) {
                 //process SA CMD to internal paras
             case CMD_SA_EOF:
                 //seems working!
+                //char:2.623A CL=2.023 A  cur_var_raw=3052  bug found 2024.1.27
                 //tmp_var[0]='9';
                 // tmp_var[1]='.';
                 // tmp_var[2]='5';wom
-                printf("char:%s ", tmp_var);
+                printf("char:%s ", tmp_var); //ok
                 //printf("  idx:%d \r\n", rcv_data_index);
                 //Voltage_float = atof(tmp_var); //not working
                 Current_float_lim = atoi(tmp_var); //working
-                tmp_frac = &tmp_var[3];
+                if (tmp_var[2]=='.')  //SA01.100A
+                    tmp_frac = &tmp_var[3];
+                else if (tmp_var[1]=='.') //SA1.100A
+                    tmp_frac = &tmp_var[2];
+                
                 // printf(" atoi_2=%d\r\n",  atoi ( tmp_frac)); //working
                 Cur_frac = atoi(tmp_frac);
                 Current_float_lim = Current_float_lim + Cur_frac / 1000.0;
@@ -837,7 +842,10 @@ void UARTComm_Rcv_Task(void) {
                 //printf("  idx:%d \r\n", rcv_data_index);
                 //Voltage_float = atof(tmp_var); //not working
                 Voltage_float = atoi(tmp_var); //working
-                tmp_frac = &tmp_var[3];
+                if (tmp_var[2]=='.')  //SV11.100V
+                    tmp_frac = &tmp_var[3];
+                else if (tmp_var[1]=='.') //SV4.100V
+                    tmp_frac = &tmp_var[2];
                 // printf(" atoi_2=%d\r\n",  atoi ( tmp_frac)); //working
                 Vol_frac = atoi(tmp_frac);
                 Voltage_float = Voltage_float + Vol_frac / 1000.0;
@@ -874,7 +882,10 @@ void UARTComm_Rcv_Task(void) {
             case CMD_SC_EOF:
                 printf("char:%s ", tmp_var);
                 Current_float_lim = atoi(tmp_var); //working
-                tmp_frac = &tmp_var[3];
+                if (tmp_var[2]=='.')  //SC01.100A
+                    tmp_frac = &tmp_var[3];
+                else if (tmp_var[1]=='.') //SC1.100A
+                    tmp_frac = &tmp_var[2];
                 // printf(" atoi_2=%d\r\n",  atoi ( tmp_frac)); //working
                 Cur_frac = atoi(tmp_frac);
                 Current_float_lim = Current_float_lim + Cur_frac / 1000.0;

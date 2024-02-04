@@ -53,7 +53,7 @@
     MICROCHIP PROVIDES THIS SOFTWARE CONDITIONALLY UPON YOUR ACCEPTANCE OF THESE
     TERMS.
  */
-
+#include <stdio.h>
 #include <stdint.h>
 #include <xc.h>
 #include "project_settings.h"

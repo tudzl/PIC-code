@@ -70,7 +70,9 @@ void Tasks_10ms(void);
 void Tasks_100ms(void);
 void Tasks_1s(void);
 void Tasks_Background(void);
-
+//for benchtest only
+extern uint16_t tmr1_INT_cnt;
+extern uint8_t Math_bench_mode;
 //=======================================================================================================
 //
 //  put your application specific code in the file main/main_scheduler.c in the following functions:
@@ -94,42 +96,42 @@ void Tasks_Background(void);
 //=======================================================================================================
 
 #if OS_TIMER_NUMBER_OF_TIMERS > 0
-    void OS_Timer_Tick(void);
+void OS_Timer_Tick(void);
 #endif
 
-static volatile uint16_t   scheduler_interrupt_leader_100us = 0;
-static volatile uint16_t   scheduler_interrupt_follower_100us = 0;
-static volatile uint8_t    scheduler_interrupt_realtime_counter_1ms = 0;
+static volatile uint16_t scheduler_interrupt_leader_100us = 0;
+static volatile uint16_t scheduler_interrupt_follower_100us = 0;
+static volatile uint8_t scheduler_interrupt_realtime_counter_1ms = 0;
 
 #if OS_USE_MCC_TIMER1 == 0
-static inline void OS_Scheduler_Init_Timer1_100us(void)
-{
+
+static inline void OS_Scheduler_Init_Timer1_100us(void) {
     //Switch off Timer 1
-    T1CONbits.TON = 0;      // Disable Timer1
-    IEC0bits.T1IE = 0;      // Disable Timer1 interrupt
+    T1CONbits.TON = 0; // Disable Timer1
+    IEC0bits.T1IE = 0; // Disable Timer1 interrupt
 
     //Configure Timer 1
-    T1CONbits.TSIDL = 0;    // Timer1 Stop in Idle Mode: Continues module operation in Idle mode
-    T1CONbits.TMWDIS = 0;   // Asynchronous Timer1 Write Disable: Back-to-back writes are enabled in Asynchronous mode
-    T1CONbits.TMWIP = 0;    // Asynchronous Timer1 Write in Progress: Write to the timer in Asynchronous mode is complete
-    T1CONbits.PRWIP = 0;    // Asynchronous Period Write in Progress: Write to the Period register in Asynchronous mode is complete
-    T1CONbits.TECS = 0b11;  // Timer1 Extended Clock Select: FRC clock
-    T1CONbits.TGATE = 0;    // Timer1 Gated Time Accumulation Enable: Gated time accumulation is disabled when TCS = 0
-    T1CONbits.TCKPS = 0;    // Timer1 Input Clock Prescale Select: 1:1
+    T1CONbits.TSIDL = 0; // Timer1 Stop in Idle Mode: Continues module operation in Idle mode
+    T1CONbits.TMWDIS = 0; // Asynchronous Timer1 Write Disable: Back-to-back writes are enabled in Asynchronous mode
+    T1CONbits.TMWIP = 0; // Asynchronous Timer1 Write in Progress: Write to the timer in Asynchronous mode is complete
+    T1CONbits.PRWIP = 0; // Asynchronous Period Write in Progress: Write to the Period register in Asynchronous mode is complete
+    T1CONbits.TECS = 0b11; // Timer1 Extended Clock Select: FRC clock
+    T1CONbits.TGATE = 0; // Timer1 Gated Time Accumulation Enable: Gated time accumulation is disabled when TCS = 0
     T1CONbits.TCKPS = 0; // Timer1 Input Clock Prescale Select: 1:1
-    T1CONbits.TSYNC = 0;    // Timer1 External Clock Input Synchronization Select: Does not synchronize the External Clock input
-    T1CONbits.TCS = 0;      // Timer1 Clock Source Select: Internal peripheral clock
+    T1CONbits.TCKPS = 0; // Timer1 Input Clock Prescale Select: 1:1
+    T1CONbits.TSYNC = 0; // Timer1 External Clock Input Synchronization Select: Does not synchronize the External Clock input
+    T1CONbits.TCS = 0; // Timer1 Clock Source Select: Internal peripheral clock
 
-    TMR1 = 0x00;            // Reset Timer Counter Register TMR to Zero; 
-    PR1 = 9999;             // Period = 0.0001 s; Frequency = 100000000 Hz; PR 9999
+    TMR1 = 0x00; // Reset Timer Counter Register TMR to Zero; 
+    PR1 = 9999; // Period = 0.0001 s; Frequency = 100000000 Hz; PR 9999
 
-    IPC0bits.T1IP = 1;      // Set interrupt priority to one (cpu is running on ip zero)
-    IFS0bits.T1IF = 0;      // Reset interrupt flag bit
+    IPC0bits.T1IP = 1; // Set interrupt priority to one (cpu is running on ip zero)
+    IFS0bits.T1IF = 0; // Reset interrupt flag bit
 
     //Switch on Timer 1
-    IEC0bits.T1IE = 1;      // Enable Timer1 interrupt
-    T1CONbits.TON = 1;      // Enable Timer1
-    
+    IEC0bits.T1IE = 1; // Enable Timer1 interrupt
+    T1CONbits.TON = 1; // Enable Timer1
+
 }
 #endif
 
@@ -137,15 +139,15 @@ static inline void OS_Scheduler_Init_Timer1_100us(void)
 //  @brief  Initializes Scheduler
 //  @note   call this function in your main routine before calling the RunForever function
 //=======================================================================================================
-void OS_Scheduler_Init(void)
-{
-    #if OS_USE_MCC_TIMER1 == 0
+
+void OS_Scheduler_Init(void) {
+#if OS_USE_MCC_TIMER1 == 0
     OS_Scheduler_Init_Timer1_100us();
-    #endif
+#endif
 #if OS_USE_SYSTIME == 1
     OS_SysTime_ResetTime();
 #endif  //OS_USE_SYSTIME
-    scheduler_interrupt_leader_100us = 0;   // reset directly before calling the Scheduler Loop
+    scheduler_interrupt_leader_100us = 0; // reset directly before calling the Scheduler Loop
     scheduler_interrupt_follower_100us = 0; // reset directly before calling the Scheduler Loop
 }
 
@@ -158,22 +160,25 @@ void OS_Scheduler_Init(void)
 #if OS_USE_MCC_TIMER1 == 1
 void TMR1_CallBack(void)
 #else
-void __attribute__((__interrupt__,no_auto_psv)) _T1Interrupt(void)
+
+void __attribute__((__interrupt__, no_auto_psv)) _T1Interrupt(void)
 #endif
 {
+    tmr1_INT_cnt++; //debug math bench only, 
     scheduler_interrupt_leader_100us++; //increment our counter for the scheduler, no tick gets lost
-    _T1IF = 0;                          //clear Timer1 interrupt flag
+    _T1IF = 0; //clear Timer1 interrupt flag
 #if OS_TIMER_NUMBER_OF_TIMERS > 0
     OS_Timer_Tick();
 #endif
-    Tasks_Realtime_100us();
-    if (++scheduler_interrupt_realtime_counter_1ms >= 10)
-    {
+    if (0 == Math_bench_mode) { //need to be commented for normal running
+        Tasks_Realtime_100us();
+        if (++scheduler_interrupt_realtime_counter_1ms >= 10) {
 #if OS_USE_SYSTIME == 1
-        OS_SysTime_IncrementTime_1ms();
+            OS_SysTime_IncrementTime_1ms();
 #endif  //OS_USE_SYSTIME
-        Tasks_Realtime_1ms();
-        scheduler_interrupt_realtime_counter_1ms = 0;
+            Tasks_Realtime_1ms();
+            scheduler_interrupt_realtime_counter_1ms = 0;
+        }
     }
 }
 
@@ -184,46 +189,39 @@ void __attribute__((__interrupt__,no_auto_psv)) _T1Interrupt(void)
 //          please consider that the timing of the calls are dependent on the duration of the last call
 //          the resulting jitter therefore depends on the timing of the calls before
 //=======================================================================================================
-void OS_Scheduler_RunOnce(void)
-{
-    volatile static uint16_t scheduler_1ms_timer = 0;       // local counter for 1ms tasks
-    volatile static uint16_t scheduler_10ms_timer = 0;      // local counter for 10ms tasks
-    volatile static uint16_t scheduler_100ms_timer = 0;     // local counter for 100ms tasks
-    volatile static uint16_t scheduler_1s_timer = 0;        // local counter for 1s tasks
+
+void OS_Scheduler_RunOnce(void) {
+    volatile static uint16_t scheduler_1ms_timer = 0; // local counter for 1ms tasks
+    volatile static uint16_t scheduler_10ms_timer = 0; // local counter for 10ms tasks
+    volatile static uint16_t scheduler_100ms_timer = 0; // local counter for 100ms tasks
+    volatile static uint16_t scheduler_1s_timer = 0; // local counter for 1s tasks
 
     //TODO: should we implement a Watchdog that gets triggered in one of the Task-Routines?
 
-    if (scheduler_interrupt_follower_100us != scheduler_interrupt_leader_100us)
-    {
+    if (scheduler_interrupt_follower_100us != scheduler_interrupt_leader_100us) {
         scheduler_interrupt_follower_100us++;
-        Tasks_100us();                              //call 100µs tasks
-        if (++scheduler_1ms_timer >= 10)
-        {
-            scheduler_1ms_timer = 0;                //reset 1 ms timer
-            Tasks_1ms();                            //call 1 ms tasks, App_GUI_Task_1ms, send stream data(ADC+flags)
-            if (++scheduler_10ms_timer >= 10)
-            {
-                scheduler_10ms_timer = 0;           //reset 10 ms timer
-                Tasks_10ms();                       //call 10 ms tasks,,Dev_Button_Task_10ms
-                if (++scheduler_100ms_timer >= 10)
-                {
-                    scheduler_100ms_timer = 0;      //reset 100 ms timer
-                    Tasks_100ms();                  //call 100 ms tasks,    App_HMI_Task_100ms()-->SetReferencevoltage,     Drv_LED_Task_100ms();
-                    if (++scheduler_1s_timer >= 10)
-                    {
+        Tasks_100us(); //call 100µs tasks
+        if (++scheduler_1ms_timer >= 10) {
+            scheduler_1ms_timer = 0; //reset 1 ms timer
+            Tasks_1ms(); //call 1 ms tasks, App_GUI_Task_1ms, send stream data(ADC+flags)
+            if (++scheduler_10ms_timer >= 10) {
+                scheduler_10ms_timer = 0; //reset 10 ms timer
+                Tasks_10ms(); //call 10 ms tasks,,Dev_Button_Task_10ms
+                if (++scheduler_100ms_timer >= 10) {
+                    scheduler_100ms_timer = 0; //reset 100 ms timer
+                    Tasks_100ms(); //call 100 ms tasks,    App_HMI_Task_100ms()-->SetReferencevoltage,     Drv_LED_Task_100ms();
+                    if (++scheduler_1s_timer >= 10) {
                         scheduler_1s_timer = 0;
-                        #if OS_FEATURE_WATCHDOG_ENABLED == 1
-							OS_Watchdog_KeepAlivePing();
-                        #endif	
-                        Tasks_1s();                  //call 1 s tasks
+#if OS_FEATURE_WATCHDOG_ENABLED == 1
+                        OS_Watchdog_KeepAlivePing();
+#endif	
+                        Tasks_1s(); //call 1 s tasks
                     }
                 }
             }
         }
-    }
-    else
-    {
-        Tasks_Background();                         // run the background tasks with their own timing
+    } else {
+        Tasks_Background(); // run the background tasks with their own timing
     }
 }
 
@@ -234,13 +232,13 @@ void OS_Scheduler_RunOnce(void)
 //          please consider that the timing of the calls are dependent on the duration of the last call
 //          the resulting jitter therefore depends on the timing of the calls before
 //=======================================================================================================
-void OS_Scheduler_RunForever(void)
-{
+
+void OS_Scheduler_RunForever(void) {
     // do some initialization
-    scheduler_interrupt_leader_100us = 0;   // reset directly before calling the Scheduler Loop
+    scheduler_interrupt_leader_100us = 0; // reset directly before calling the Scheduler Loop
     scheduler_interrupt_follower_100us = 0; // reset directly before calling the Scheduler Loop
 
-    while (1)                       // run that loop forever
+    while (1) // run that loop forever
         OS_Scheduler_RunOnce();
 }
 
